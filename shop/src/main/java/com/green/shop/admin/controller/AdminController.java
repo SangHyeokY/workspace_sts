@@ -2,6 +2,7 @@ package com.green.shop.admin.controller;
 
 import com.green.shop.admin.service.AdminServiceImpl;
 import com.green.shop.buy.service.BuyServiceImpl;
+import com.green.shop.buy.vo.BuyDetailVO;
 import com.green.shop.buy.vo.BuyVO;
 import com.green.shop.item.service.ItemServiceImpl;
 import com.green.shop.item.vo.CategoryVO;
@@ -91,6 +92,7 @@ public class AdminController {
         // Mapper에서 쿼리를 새로 만들어야 함 (MemberID 다르게 봐야됨)
         @GetMapping("/adminHistory")
         public String adminHistory(Model model){
+
             //구매 목록 조회
             List<BuyVO> buyList = adminService.selectBuyInfoList();
             model.addAttribute("buyList", buyList);
@@ -101,9 +103,10 @@ public class AdminController {
         //상세구매 내역 조회
         @ResponseBody
         @PostMapping("/selectBuyDetail")
-        public void selectBuyDetail(){
-            //구매 상세 내역 조회
-
+        public List<BuyVO> selectBuyDetail(){
+            //구매 상세 내역 조회 (비동기)
+            List<BuyVO> detailList = adminService.selectBuyInfoList();
+            return detailList;
         }
 
 

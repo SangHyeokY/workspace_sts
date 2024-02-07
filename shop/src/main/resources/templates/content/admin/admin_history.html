@@ -24,9 +24,9 @@
                                 <td>
                                     <div class="row mb-3" style="padding-right: 20px;">
                                         <div class="col">
-                                            <select class="form-select" style="box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);">
-                                                <option selected style="text-align: center;">선택</option>
-                                                <option value="1">구매번호</option>
+                                            <select class="form-select"
+                                                style="box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);">
+                                                <option value="1" selected>구매번호</option>
                                                 <option value="2">구매자명</option>
                                             </select>
                                         </div>
@@ -35,7 +35,8 @@
                                 <td colspan="2">
                                     <div class="row mb-3">
                                         <div class="col">
-                                            <input type="text" class="form-control" style="box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);">
+                                            <input type="text" class="form-control"
+                                                style="box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);">
                                         </div>
                                     </div>
                                 </td>
@@ -46,7 +47,7 @@
                                     <div class="row mb-3" style="padding-right: 20px;">
                                         <div class="col">
                                             <input class="form-control" type="text" value="구매일자" aria-label="input"
-                                                disabled readonly style="background-color: white; text-align: center;
+                                                disabled readonly style="background-color: white;
                                                 box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);">
                                         </div>
                                     </div>
@@ -54,15 +55,17 @@
                                 <td>
                                     <div class="row mb-3">
                                         <div class="col">
-                                            <div class="input-group" style="box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);">
+                                            <div class="input-group"
+                                                style="box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);">
                                                 <span class="input-group-text" id="basic-addon1">From</span>
-                                                <input type="date" class="form-control" aria-describedby="basic-addon1" style="text-align: center;">
+                                                <input type="date" class="form-control" aria-describedby="basic-addon1">
                                             </div>
                                         </div>
                                         <div class="col">
-                                            <div class="input-group" style="box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);">
+                                            <div class="input-group"
+                                                style="box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);">
                                                 <span class="input-group-text" id="basic-addon2">To</span>
-                                                <input type="date" class="form-control" aria-describedby="basic-addon2" style="text-align: center;">
+                                                <input type="date" class="form-control" aria-describedby="basic-addon2">
                                             </div>
                                         </div>
                                     </div>
@@ -83,12 +86,10 @@
         <div class="row">
             <div class="col"></div>
         </div>
-
-
         <!-- @@@@@@@@@@@@@@테이블@@@@@@@@@@@@@@ -->
         <div class="row">
-            <table id="MyList" class="table table-hover align-middle" 
-            style="box-shadow: 0px 0px 10px 0px rgb(230, 230, 230); text-align: center;">
+            <table id="MyList" class="table table-hover align-middle"
+                style="box-shadow: 0px 0px 10px 0px rgb(230, 230, 230); text-align: center;">
                 <colgroup>
                     <col width="*">
                     </col>
@@ -124,7 +125,6 @@
     </div>
     <!-- ///////////////////////////////////////////////////////////// -->
     </div>
-
     <!-- Modal -->
     <div class="modal fade" id="buy-detail-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -144,18 +144,17 @@
                         <tbody>
                             <tr>
                                 <td><strong>구매번호</strong></td>
-                                <td>1</td>
+                                <td id="buyCode-td"></td>
                                 <td><strong>구매자ID</strong></td>
-                                <td>2</td>
+                                <td id="memberId-td"></td>
                             </tr>
                             <tr>
                                 <td><strong>구매금액</strong></td>
-                                <td>3</td>
+                                <td id="buyPrice-td"></td>
                                 <td><strong>구매일자</strong></td>
-                                <td>4</td>
+                                <td id="buyDate-td"></td>
                             </tr>
                         </tbody>
-
                     </table>
                     <div class="header-div"></div>
                     <table class="table table-hover" style="text-align: center;">
@@ -174,24 +173,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- buyDetailVo -->
-                            <tr>
+                            <!-- buyVo -->
+                            <tr th:each="buyDetail : ${buyDetailList}">
                                 <td>1</td>
                                 <td>2</td>
                                 <td>3</td>
-                                <td>4</td>
+                                <td>[[${buyDetail.buyPrice}]]</td>
                             </tr>
                         </tbody>
                     </table>
-
-
-
                 </div>
             </div>
         </div>
     </div>
-
-
 </th:block>
 
 <th:block layout:fragment="content_js">
