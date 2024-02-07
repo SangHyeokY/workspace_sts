@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{fragment/personal_layout}">
+
+<th:block layout:fragment="content_css">
+  <!-- html 파일이 열릴때 같이 실행되는 css -->
+  <!-- <link rel="stylesheet" href="/"> -->
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+  <div class="row">
+    <div class="col">
+
+      <div class="accordion" id="accordionPanelsStayOpen">
+        <div class="accordion-item" th:each="buy, state : ${buyList}">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              th:data-bs-target="${'#collapse_' + state.count}" aria-expanded="true"
+              aria-controls="panelsStayOpen-collapseOne">
+              [[${#numbers.formatInteger(#lists.size(buyList) - state.index, 2)}]]
+              &nbsp;|&nbsp;
+              <strong>[[${buy.buyDetailList[0].itemVO.itemName}]]</strong>
+              <th:block th:if="${#lists.size(buy.buyDetailList) != 1}">&nbsp;외 [[${#lists.size(buy.buyDetailList) -
+                1}]]개 구매</th:block>
+              <div style="padding-left: 10px; box-shadow: none;">
+                &ensp;[[${buy.buyDate}]]
+                &ensp;
+                <strong>결제금액</strong>&ensp;[[${#numbers.formatCurrency(buy.buyPrice)}]]
+            </button>
+          </h2>
+          <div th:id="${'collapse_' + state.count}" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <table id="MyList" class="table table-hover align-middle">
+                <colgroup>
+                  <col width="15%">
+                  </col>
+                  <col width="*">
+                  </col>
+                  <col width="15%">
+                  </col>
+                  <col width="20%">
+                  </col>
+                </colgroup>
+                <thead>
+                  <tr>
+                    <td><strong>No.</strong></td>
+                    <td><strong>구매목록</strong></td>
+                    <td><strong>수량</strong></td>
+                    <td><strong>결제금액</strong></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="buyDetail, detailState : ${buy.buyDetailList}">
+                    <td>[[${#lists.size(buy.buyDetailList) - detailState.index}]]</td>
+                    <td style="text-align: left;">
+                      <img th:src="@{'/upload/' + ${buyDetail.itemVO.imgList[0].attachedFileName}}" width="120px"
+                        style="box-shadow: 0px 0px 7px 0px rgb(230, 230, 230); padding: 5px;">
+                      <!-- 리스트 안에 정보가 1개 뿐이므로 0을 조회 -->
+                      <!-- isMain = 'Y' -->
+                      &emsp;
+                      [[${buyDetail.itemVO.itemName}]]
+                    </td>
+                    <td>[[${buyDetail.buyCnt}]]</td>
+                    <td>[[${#numbers.formatCurrency(buyDetail.totalPrice)}]]</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</th:block>
+
+<th:block layout:fragment="content_js">
+  <!-- html 파일이 열릴때 같이 실행되는 js -->
+  <!-- <script src="/"></script> -->
+</th:block>
+
+</html>

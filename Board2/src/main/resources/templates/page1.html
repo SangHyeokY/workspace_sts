@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+    .container{
+        margin: 0px auto;
+        width: 300px;
+        text-align: center;
+    }
+    .content{
+        text-align: left;
+    }
+    .s{
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>page1.html</h1>
+<div class="content">
+    <h3 class="s">Name</h3>: [[${session.name}]]
+    <h3 class="s">Age</h3>: [[${session.age}]]
+    <h3 class="s">Member</h3>: [[${session.member}]]
+</div>
+<br>
+<a href="/test/page2">>>>>page2 MOVE~<<<<</a>
+<br>
+<br>
+<input type="button" value="HOME" onclick="goHome()">
+</div>
+<script>
+    function goHome(){
+        location.href='/member/home';
+    }
+</script>
+</body>
+</html>

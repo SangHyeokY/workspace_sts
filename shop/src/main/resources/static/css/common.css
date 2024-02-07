@@ -1,0 +1,121 @@
+/* 모든 html에서 공통적으로 적용되는 css */
+@font-face{
+    font-family:'DNFForgedBlade';font-style:normal;font-weight:300;
+    src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Light.otf')format('opentype')}
+    
+@font-face{
+    font-family:'DNFForgedBlade';font-style:normal;font-weight:500;
+    src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('opentype')}
+    
+@font-face{
+    font-family:'DNFForgedBlade';font-style:normal;font-weight:700;
+    src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Bold.otf')format('opentype')}
+
+@font-face {
+    font-family: 'NEXON Lv2 Gothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv2 Gothic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;}
+@font-face {
+        font-family: 'ChungjuKimSaengTTF';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/ChungjuKimSaengTTF.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+body{
+    font-family: 'NEXON Lv2 Gothic';
+    background-image: url(white-paper-texture.jpg);
+}
+/* 쇼핑몰 제목 크기 변경 */
+.main-title{
+    font-family: 'ChungjuKimSaengTTF';
+    font-size: 70pt;
+    font-weight: bold;
+}
+/* 마우스 올리면 표시 */
+.pointer-span:hover{
+    cursor: pointer;
+    color: orange;
+}
+#top-menu{
+    font-size: small;
+}
+.header-div{
+    margin-bottom: 1.4rem;
+}
+.third-menu{
+    border-bottom: 1px solid black;
+}
+.third-menu td:hover{
+    cursor: pointer;
+    font-weight: bold;
+    color: green;
+}
+.third-menu td{
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: small;
+}
+.btn-pants{
+    border: none;
+    background-color: white;
+    font-size: small;
+}
+.btn-pants2:hover{
+    cursor: pointer;
+    font-weight: bold;
+    color: green;
+}
+#regBook{
+    font-size: 3rem;
+}
+.mainName{
+    width: 100%;
+    font-size: large;
+    text-overflow: clip;
+    text-overflow: ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+}
+.card:hover{
+   border: 3px solid rgb(107, 176, 255);
+   background-color: rgb(250, 250, 250);
+}
+#mainImg, #subImgs, .inputTagsForAdmin{
+    box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);
+}
+/* footer{
+    position: absolute ;
+    bottom: 0px;
+    height: 2rem;
+}
+#footerTitle{
+    font-size: 11px;
+    font-weight: bold;
+    text-wrap: nowrap;
+    color: #636363;
+} */
+#buyProduction {
+    background-color: white;
+    border-radius: 7px;
+    box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);
+}
+#buyProduction div{
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+#itemCnt[type="number"]{
+	width: 3rem;
+    border: 2px solid rgb(230, 230, 230);
+    border-radius: 7px;
+}
+#table-deco{
+    box-shadow: 0px 0px 10px 0px rgb(230, 230, 230);
+}
+#MyList td{
+    border-bottom: 1px solid rgb(230, 230, 230);
+}
+#accordionPanelsStayOpen div{
+    box-shadow: 0px 0px 10px 0px rgb(230, 230, 230);
+}

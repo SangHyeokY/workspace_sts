@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="headerFragment">
+<!-- ------------------------------------------------------------------------------ -->
+<div id="top-menu">
+  <div class="header-div"></div>
+  <div class="row">
+    <!-- text-start : 왼쪽 정렬 -->
+    <div class="col text-start">
+      <span>
+        <th:block th:if="${session.loginInfo != null}">
+          [<strong>[[${session.loginInfo.memberId}]]</strong>님 <font color="red"><strong>ON</strong></font>]
+          <th:block th:if="${session.loginInfo.memberRoll == 'ADMIN'}">
+            <span  class="pointer-span" onclick="location.href='/admin/regItemForm';">관리자 메뉴</span>
+          </th:block>
+        </th:block>
+        <th:block th:if="${session.loginInfo == null}">
+          [<strong>로그인</strong>해주세요.]
+        </th:block>
+      </span>
+    </div>
+    <div class="col text-end">
+        <span class="pointer-span" data-bs-toggle="modal">즐겨찾기</span>
+        &nbsp;|&nbsp;
+        <th:block th:if="${session.loginInfo == null}">
+          <span class="pointer-span" onclick="goLoginForm()">로그인</span>
+        </th:block>
+        <th:block th:if="${session.loginInfo != null}">
+          <span class="pointer-span" onclick="goLogoutForm()">로그아웃</span>
+        </th:block>
+        &nbsp;|&nbsp;
+        <span class="pointer-span" data-bs-toggle="modal" data-bs-target="#join-modal" nowrap>회원가입</span>
+        &nbsp;|&nbsp;
+        <span class="pointer-span" data-bs-toggle="modal" nowrap onclick="location.href='/buy/history'">내정보관리</span>
+        &nbsp;|&nbsp;
+        <span class="pointer-span" data-bs-toggle="modal" nowrap>주문조회</span>
+        &nbsp;|&nbsp;
+        <span class="pointer-span" data-bs-toggle="modal" nowrap>고객센터</span>
+    </div>
+  </div>
+</div>
+<!-- ------------------------------------------------------------------------------ -->
+<!-- 제목 -->
+    <div class="header-div">
+        <div class="col text-center">
+            <h1 class="main-title" onclick="location.href='/item/list'" 
+            style="cursor: pointer;">BOOK24</h1>
+        </div>
+    </div>
+<!-- ------------------------------------------------------------------------------ -->
+<!-- 회원가입 모달 -->
+  <!-- Modal -->
+  <div class="modal fade" id="join-modal" tabindex="-1" aria-labelledby="joinModallLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- <div class="modal-header">
+          <h1 class="modal-title fs-5" id="joinModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div> -->
+<!-- ------------------------------------------------------------------------------ -->
+        <div class="modal-body">
+            <form class="row g-3" id="join-form" action="/member/join" method="post">
+                <div class="col-12">
+                    <label for="" class="form-label">아이디</label>
+                    <input type="text" class="form-control" id="memberId" name="memberId">
+                </div>
+                <div class="col-12">
+                    <label for="" class="form-label">비밀번호</label>
+                    <input type="password" class="form-control" id="memberPw" name="memberPw">
+                </div>
+                <div class="col-12">
+                    <label for="" class="form-label">비밀번호 재입력</label>
+                    <input type="password" class="form-control" id="">
+                </div>
+                <div class="col-12">
+                    <label for="" class="form-label">이름</label>
+                    <input type="text" class="form-control" id="" name="memberName">
+                </div>
+                <div class="col-4">
+                    <label for="" class="form-label">전화번호</label>
+                    <select id="" class="form-select" name="memberTel">
+                        <option selected value="010">010</option>
+                        <option value="011">011</option>
+                    </select>
+                </div>
+                <div class="col-4">
+                    <label for="" class="form-label">&nbsp;</label>
+                    <input type="text" class="form-control" id="" name="memberTel">
+                </div>
+                <div class="col-4">
+                    <label for="" class="form-label">&nbsp;</label>
+                    <input type="text" class="form-control" id="" name="memberTel">
+                </div>
+                <div class="col-md-6">
+                  <label for="" class="form-label">이메일</label>
+                  <input type="email" class="form-control" id="" name="memberEmail">
+                </div>
+                <div class="col-md-6">
+                    <label for="" class="form-label">&nbsp;</label>
+                    <select id="" class="form-select" name="memberEmail">
+                        <option selected value="@naver.com">@naver.com</option>
+                        <option value="@gmail.com">@gmail.com</option>
+                        <option value="@daum.net">@daum.net</option>
+                        <option value="직접 입력하기">직접 입력하기</option>
+                    </select>
+                </div>
+                <div class="col-8">
+                  <label for="" class="form-label">주소</label>
+                  <input type="text" class="form-control" id="postCode" readonly name="postCode">
+                </div>
+                <div class="col-4 d-grid">
+                    <label for="" class="form-label">&nbsp;</label>
+                    <input type="button" class="btn btn-dark" id="" value="검색" onclick="searchAddress()">
+                </div>
+                <div class="col-12">
+                    <input type="text" class="form-control" id="address" readonly name="memberAddr">
+                </div>
+                <div class="col-12">
+                    <input type="text" class="form-control" id="" placeholder="상세주소 입력" name="addrDetail">
+                </div>
+                <div class="col-md-12">
+                  <label for="gender" class="form-label"></label>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="gender" id="" value="남성" checked>
+                      <label class="form-check-label" for="">남성</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="gender" id="" value="여성">
+                      <label class="form-check-label" for="">여성</label>
+                    </div>
+                </div>
+              </form>
+        </div>
+<!-- ------------------------------------------------------------------------------ -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="join()">가입완료</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- 주소 검색 api -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- js 이어주기 -->
+<script src="/js/fragment/user_header.js"></script>
+</th:block>
+</html>

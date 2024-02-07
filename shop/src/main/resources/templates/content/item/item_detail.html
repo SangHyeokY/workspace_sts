@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragment/user_layout}" >
+
+<th:block layout:fragment="content_css">
+    <!-- html 파일이 열릴 때 같이 실행되는 css -->
+    <!-- <link rel="stylesheet" href="/"> -->
+</th:block>
+<th:block layout:fragment="contentFragment">
+<!-- ------------------------------------------------------------------------------ -->
+
+
+<th:block th:each="itemDetail : ${item}">
+<div class="row justify-content-center" id="buyProduction">
+    <div class="col-8">
+        <div class="header-div"></div>
+        <div class="row">
+            <div class="offset-3 col-3" style="box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);">
+                <th:block th:each="img : ${itemDetail.imgList}">
+                    <th:block th:if="${img.isMain=='Y'}">
+                        <img width="100%" height="100%" th:src="@{'/upload/'+${img.attachedFileName}}">
+                    </th:block>
+                </th:block>
+            </div>
+            <div class="col-3">
+                <div class="col-12"><strong style="font-size: larger;">[[${itemDetail.itemName}]]</strong></div>
+                <div class="col-12">가격&ensp;&ensp;:&ensp;&ensp;[[${#numbers.formatCurrency(itemDetail.itemPrice)}]]</div>
+<!-- ------------------------------------------------------------------------------ -->                
+                <!-- <form id="insert-cart-form" action="/cart/insertCart" method="post"> -->
+                    <form action="/buy/insertBuy" method="post" id="insert-buy-form">
+                        <div class="col-12 align-items-center">수량&ensp;&ensp;:&ensp;&ensp;
+                            <input type="hidden" name="totalPrice" value="">
+                            <input type="hidden" name="itemCode" th:value="${itemDetail.itemCode}">
+                            <input id="itemCnt" name="buyCnt" type="number" min="1" value="0" th:oninput="setTotalPrice(this, [[${itemDetail.itemPrice}]])">개
+                        </div>
+                    </form>
+        
+                <!-- </form> -->
+<!-- ------------------------------------------------------------------------------ -->
+                <div class="col-12">합계&ensp;&ensp;:&ensp;&ensp;₩<span class="totalPrice-span">0</span></div>
+<!-- ------------------------------------------------------------------------------ -->                
+                <div class="col-12">
+                    <button type="button" class="btn btn-dark" th:onclick="goBag([[${session.loginInfo}]], [[${itemDetail.itemCode}]])">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-handbag-fill" viewBox="0 0 16 16">
+                            <path d="M8 1a2 2 0 0 0-2 2v2H5V3a3 3 0 1 1 6 0v2h-1V3a2 2 0 0 0-2-2M5 5H3.36a1.5 1.5 0 0 0-1.483 1.277L.85 13.13A2.5 2.5 0 0 0 3.322 16h9.355a2.5 2.5 0 0 0 2.473-2.87l-1.028-6.853A1.5 1.5 0 0 0 12.64 5H11v1.5a.5.5 0 0 1-1 0V5H6v1.5a.5.5 0 0 1-1 0z"/>
+                        </svg>
+                        &nbsp;장바구니에 담기</button>
+                </div>
+<!-- ------------------------------------------------------------------------------ -->
+
+                <div class="col-12">
+                    <button type="button" class="btn btn-dark" onclick="goBuy()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save-fill" viewBox="0 0 16 16">
+                            <path d="M8.5 1.5A1.5 1.5 0 0 1 10 0h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h6c-.314.418-.5.937-.5 1.5v7.793L4.854 6.646a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l3.5-3.5a.5.5 0 0 0-.708-.708L8.5 9.293z"/>
+                        </svg>
+                        &nbsp;바로 구매하기&ensp;&ensp;</button>
+                </div>
+<!-- ------------------------------------------------------------------------------ -->                
+            </div>
+        </div>
+        <div class="header-div"></div>
+        <div class="row mb-3"></div>
+            <div class="col" style="border-bottom: 2px solid black;">
+                <div><strong>소개글</strong></div>
+                <div>[[${itemDetail.itemIntro}]]</div>
+            </div>
+            <div class="header-div"></div>
+     <th:block th:each="img : ${itemDetail.imgList}">
+            <th:block th:if="${img.isMain=='N'}">
+        <div class="row">
+            <div class="col text-center">
+                <img th:src="@{'/upload/'+${img.attachedFileName}}">
+            </div>
+        </div>
+            </th:block>
+      </th:block>
+    </div>
+</div>
+</th:block>
+
+
+<!-- ------------------------------------------------------------------------------ -->
+<!-- html 코드 작성 -->
+</th:block>
+<th:block layout:fragment="content_js">
+    <!-- html 파일이 열릴 때 같이 실행되는 js -->
+    <script src="/js/content/item/item_detail.js"></script>
+</th:block>
+</html>

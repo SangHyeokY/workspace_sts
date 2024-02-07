@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+                xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+                layout:decorate="~{fragment/user_layout}">
+
+<th:block layout:fragment="content_css">
+  <!-- html 파일이 열릴때 같이 실행되는 css -->
+  <link rel="stylesheet" href="/">
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+  <div class="container" style="width: 40%;">
+    <div class="header-div"></div> <!-- 제목에서 띄우기 -->
+    <!-- ------------------------------------------------------------------------------ -->
+    <!-- 로그인 -->
+    <form class="row g-3" action="/member/login" method="post" id="login-form">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="memberId" placeholder="아이디" name="memberId" style="box-shadow: 0px 0px 10px 0px rgb(200, 200, 200);">
+        <label for="" style="font-size: 1.1rem;">&nbsp;Input Your ID</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="password" class="form-control" id="memberPw" placeholder="비밀번호" name="memberPw" style="box-shadow: 0px 0px 10px 0px rgb(200, 200, 200);">
+        <label for="" style="font-size: 1.1rem;">&nbsp;Input Your PassWord</label>
+      </div>
+       <!-- ------------------------------------------------------------------------------ -->
+       <!-- 하위버튼 -->
+      <div class="col-12 mb-1" id="btn-sign" style="text-align: center; white-space: nowrap;">
+        <button type="submit" class="btn btn-dark col-10">Login</button>&ensp;&nbsp;
+        <button type="button" class="btn btn-secondary" onclick="history.back(-1)">Back</button>
+      </div>
+      <!-- ------------------------------------------------------------------------------ -->
+      <!-- 비동기 로그인 -->
+      <div class="col-12" id="btn-sign" style="text-align: center; white-space: nowrap;">
+        <button type="button" class="btn btn-dark col-12" onclick="login()">비동기 로그인</button>
+      </div>
+    </form>
+    <!-- ------------------------------------------------------------------------------ -->
+  </div>
+</th:block>
+
+<th:block layout:fragment="content_js">
+  <!-- html 파일이 열릴때 같이 실행되는 js -->
+<script src="/js/content/member/login.js"></script>
+</th:block>
+</html>

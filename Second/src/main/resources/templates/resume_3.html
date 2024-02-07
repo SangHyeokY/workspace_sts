@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+    textarea{
+        resize: none;
+    }
+    h4{
+        font-style: italic;
+    }
+</style>
+</head>
+<body>
+<h2>이력서 확인</h2>
+<table>
+    <tr>
+        <td>
+            이름
+        </td>
+        <td>
+            <div th:text="${name}"></div>
+        </td>   
+        <td>
+            연락처
+        </td>
+        <td>
+            <div th:text="${tel}"></div>
+        </td>
+    
+    </tr>
+    <tr>
+        <td>
+            학력
+        </td>
+        <td>
+            <div th:text="${grade}"></div>
+        </td>   
+        <td>
+            지원구분
+        </td>
+        <td>
+            <div th:text="${type}"></div>
+        </td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <td>
+            자격증 정보
+        </td>
+        <td>
+            <div th:text="${certiName}"></div>
+        </td>   
+    </tr>
+    <tr>
+        <td>
+            경력 정보
+        </td>
+        <td>
+            <div th:text="${company}"></div>
+            <div th:text="${job}"></div>
+            <div th:text="${year}"></div>
+            <div th:text="${month}"></div>
+        </td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <td>
+            자기소개
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div th:text="${intro}"></div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
+<!-- 이거 왜 출력안되는지 고쳐보기 -->

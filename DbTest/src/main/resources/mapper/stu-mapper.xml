@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<!-- 모든 쿼리에 세미콜론은 붙이지 않는다 -->
+<mapper namespace="stuMapper">
+<!--STUDENT 테이블과 StudentVO를 연결하는 resultMap-->
+    <resultMap id="stu" type="com.green.DbTest.vo.StudentVO">
+    <!--column : 연결할 테이블의 컬럼명-->
+    <!--property : 테이블의 컬럼과 연결할 클래스 안의 변수-->
+        <result column="STU_NO"   property="stuNo"/>
+        <result column="STU_NAME" property="stuName"/>
+        <result column="SCORE"    property="score"/>
+        <result column="ADDR"     property="addr"/>
+    </resultMap>
+
+    <insert id="insertStudent">
+        INSERT INTO STUDENT (
+            STU_NO
+            , STU_NAME
+            , SCORE
+            , ADDR
+        ) VALUES (
+            11
+            , '이순신'
+            , 95
+            , '부산'
+        )
+    </insert>
+
+    <delete id="deleteStudent">
+        DELETE FROM STUDENT
+        WHERE STU_N0=11
+    </delete>
+
+    <delete id="delete">
+        DELETE FROM STUDENT
+        WHERE STU_NO = #{stuNo}
+    </delete>
+
+    <!--resultType : 자바에서 기본으로 제공하는 자료형-->
+    <!--resultMap : 개발자가 직접 만든 자료형-->
+    <!--select 만 조회된 데이터 나옴-->
+    <select id="selectName" resultType="String">
+        SELECT STU_NAME
+        FROM STUDENT
+        WHERE STU_NO=1
+    </select>
+
+    <select id="selectScore" resultType="int">
+        SELECT SCORE
+        FROM STUDENT
+        WHERE STU_NO=1
+    </select>
+
+    <select id="selectStu" resultMap="stu">
+        SELECT STU_NO
+        , STU_NAME
+        , SCORE
+        , ADDR
+        FROM STUDENT
+        WHERE STU_NO=1
+    </select>
+
+    <select id="selectStuList" resultMap="stu">
+        SELECT STU_NO
+        , STU_NAME
+        , SCORE
+        , ADDR
+        FROM STUDENT
+    </select>
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

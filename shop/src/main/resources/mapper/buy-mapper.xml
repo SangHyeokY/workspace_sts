@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="buyMapper">
+
+    <resultMap id="buy" type="com.green.shop.buy.vo.BuyVO">
+        <id column="BUY_CODE" property="buyCode"/>
+        <result column="MEMBER_ID" property="memberId"/>
+        <result column="BUY_PRICE" property="buyPrice"/>
+        <result column="BUY_DATE" property="buyDate"/>
+        <collection property="buyDetailList" resultMap="buyDetail"/>
+    </resultMap>
+
+    <resultMap id="buyDetail" type="com.green.shop.buy.vo.BuyDetailVO">
+        <id column="BUY_DETAIL_CODE" property="buyDetailCode"/>
+        <result column="ITEM_CODE" property="itemCode"/>
+        <result column="BUY_CNT" property="buyCnt"/>
+        <result column="TOTAL_PRICE" property="totalPrice"/>
+        <result column="BUY_CODE" property="buyCode"/>
+        <association property="itemVO" resultMap="itemMapper.item"/>
+    </resultMap>
+
+    <!-- SHOP_BUY 테이블에 INSERT -->
+    <insert id="insertBuys">
+        INSERT INTO SHOP_BUY (
+             BUY_CODE
+            , MEMBER_ID
+            , BUY_PRICE
+        ) VALUES (
+            #{buyCode}
+            , #{memberId}
+            , #{buyPrice}
+        )
+    </insert>
+
+
+    <!-- 구매 상세 정보 INSERT -->
+    <insert id="insertBuyDetails">
+        INSERT INTO BUY_DETAIL (
+            ITEM_CODE
+            , BUY_CNT
+            , TOTAL_PRICE
+            , BUY_CODE
+        ) VALUES
+        <foreach collection="buyDetailList" item="buyDetail" separator=",">
+        (
+            #{buyDetail.itemCode}
+            , #{buyDetail.buyCnt}
+            , #{buyDetail.totalPrice}
+            , #{buyCode}
+        )
+        </foreach>
+    </insert>
+
+
+<!-- 다음에 들어갈 BUY_CODE를 조회 -->
+    <select id="selectNextBuyCode" resultType="int">
+        SELECT IFNULL(MAX(BUY_CODE), 0) +1
+        FROM shop_buy
+    </select>
+
+<!-- 바로 구매시 구매상세 테이블에 insert-->
+    <insert id="insertBuyDetail">
+        INSERT INTO BUY_DETAIL (
+            ITEM_CODE
+            , BUY_CNT
+            , TOTAL_PRICE
+            , BUY_CODE
+        ) VALUES (
+            #{itemCode}
+            , #{buyCnt}
+            , #{totalPrice}
+            , #{buyCode}
+        )
+    </insert>
+
+<!-- 구매 목록 조회 (사용자용) -->
+<select id="selectBuyList" resultMap="buy">
+    SELECT DETAIL.BUY_CODE
+    , DETAIL.ITEM_CODE
+    , ITEM_NAME
+    , ATTACHED_FILE_NAME
+    , BUY_CNT
+    , TOTAL_PRICE
+    , BUY_DATE
+    , BUY_PRICE
+    FROM buy_detail DETAIL INNER JOIN shop_item ITEM
+    ON DETAIL.ITEM_CODE = ITEM.ITEM_CODE
+    INNER JOIN item_image IMG
+    ON DETAIL.ITEM_CODE = IMG.ITEM_CODE
+    INNER JOIN shop_buy BUY
+    ON DETAIL.BUY_CODE = BUY.BUY_CODE
+    WHERE IS_MAIN = 'Y'
+    AND MEMBER_ID = #{memberId}
+</select>
+
+
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

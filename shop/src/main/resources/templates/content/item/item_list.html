@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragment/user_layout}">
+
+<th:block layout:fragment="content_css">
+    <!-- html 파일이 열릴때 같이 실행되는 css -->
+    <!-- <link rel="stylesheet" href="/"> -->
+</th:block>
+<th:block layout:fragment="contentFragment">
+<!-- html 코드 작성 -->
+<!-- ------------------------------------------------------- -->
+<div class="row row-cols-5 g-4">
+    <!-- th:each : 반복문이잖음 -->
+            <div class="col" th:each="item : ${itemList}">
+                <div class="card" style="box-shadow: 0px 0px 9px 0px rgb(220, 220, 220);">
+                    <a th:href="@{/item/itemDetail(itemCode=${item.itemCode})}">
+                        <img th:src="@{'/upload/'+${item.imgList[0].attachedFileName}}" class="card-img-top" 
+                    alt="..." height="320rem" width="100%">
+                    </a>
+                    <div class="card-body">
+                        <p class="card-text mainName"><strong>[[${item.itemName}]]</strong></p>
+                        <p class="card-text">[[${#numbers.formatCurrency(item.itemPrice)}]]</p>
+                    </div>
+                </div>
+            </div>
+</div>
+<div class="header-div"></div>
+<!-- ------------------------------------------------------- -->
+</th:block>
+<div class="row" id="bt-item">
+</div>
+<th:block layout:fragment="content_js">
+    <!-- html 파일이 열릴때 같이 실행되는 js -->
+    <!-- <script src="/"></script> -->
+</th:block>
+</html>

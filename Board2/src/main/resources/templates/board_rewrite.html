@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+    .container{
+        width: 700px;
+        margin: 0px auto;
+        text-align: center;
+    }
+    table{
+        width: 100%;
+        text-align: center;
+        border-collapse: collapse;
+    }
+    .sub_title{
+        font-weight: bold;
+        background: lightblue;
+    }
+    textarea{
+        resize: none;
+        font-size: x-large;
+    }
+    .test{
+        text-align: center;
+        border: 1px solid lightslategrey;
+    }
+    .test2{
+        text-align: left;
+        border: 1px solid lightslategrey;
+    }
+    .test3{
+        color: lightpink;
+        border: 1px solid lightslategrey;
+    }
+    .container2{
+        width: 700px;
+        margin: 0px auto;
+    }
+    .box{
+        border: 1px solid lightslategrey;
+        background: lightblue;
+    }
+    .box2{
+        border: 1px solid lightslategrey;
+        background: white;
+        text-align: right;
+    }
+    .box3{
+        border: 1px solid lightslategrey;
+        background: lightblue;
+        text-align: left;
+    }
+    .q{
+        border: 1px solid lightslategrey;
+        text-align: left;
+    }
+    .q2{
+        text-align: left;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>자유게시판</h1>
+    <th:block th:if="${session.loginInfo != null}">
+        <h4 class="q2">
+        [[${session.loginInfo.memberName}]]님 반갑습니다.
+        </h4>
+    </th:block>
+    <th:block th:if="${session.loginInfo == null}">
+        <h4 class="q2">
+        로그인이 필요합니다.
+        </h4>
+    </th:block>
+
+<!-- @@@ 글 수정하기 @@@ -->
+<!-- 조회를 어떻게 해야하지? -->
+<!-- <table class="q">
+    <th:block th:each="board : ${boardList}">
+        <tr class="sub_title">
+            <td>TITLE</td>
+            <td class="q">
+            <input type="text" name="title">[[${board.title}]]
+            </td>
+        </tr>
+        <tr>
+            <td class="sub_title"></td>
+            <td class="q">
+                <textarea name="content" cols="60" rows="15">
+                    <input type="text" name="content">
+                </textarea>
+            </td>
+        </tr>
+    </th:block>
+</table> -->
+
+<table>
+    <th:block th:each="board : ${boardList}">
+        <tr>
+            <td>[[${board.title}]]</td>
+            <td>[[${board.content}]]</td>
+        </tr>
+
+
+    </th:block>
+</table>
+
+
+
+
+
+<h4>
+    <!-- history 구현 -->
+<!-- <input type="button" value="뒤로" onclick="history.back(-1)"> -->
+    <input type="button" value="뒤로" onclick="history.back(-1)">      
+    <input type="button" value="글등록" onclick="location.href='/board/updateBoardForm'">
+</h4>
+<table>
+    <tr class="box">
+        <td class="sub_title" colspan="3">
+            <th:block th:if="${session.loginInfo != null}">
+                <a href="/member/logout">[LOGOUT]</a>
+            </th:block>
+            <th:block th:if="${session.loginInfo == null}">
+                <a href="/member/home">[LOGIN]</a>
+            </th:block>
+        </td>
+    </tr>
+
+</table>
+</div>
+<script>
+    function goReply(){
+        location.href='/board/reply';
+    }
+</script>
+</body>
+</html>

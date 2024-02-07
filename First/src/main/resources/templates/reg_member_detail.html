@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+    <style>
+        textarea{
+            resize : none;
+        }
+
+        table{
+            margin-left: auto;
+            margin-right: auto;
+            width: 500px;
+            border: 1px solid black;
+            border-collapse : collapse;
+            background-color: lightcyan;
+    }
+        h4{
+           text-align: center;
+        }
+    
+        .sub1{
+            text-align: left;
+        }
+
+    </style>
+</head>
+<body>
+
+    <form action="goInfo" method="post">
+        <input type="hidden" name="id" th:value="${regMemberVO.id}">
+        <input type="hidden" name="pw" th:value="${regMemberVO.pw}">
+        <input type="hidden" name="name" th:value="${regMemberVO.name}">
+        <input type="hidden" name="email" th:value="${regMemberVO.email}">
+        <input type="hidden" name="birth" th:value="${regMemberVO.birth}">
+
+        <th:block th:each="each : ${regMemberVO.tel}">
+            <input type="hidden" name="tel" th:value="${each}">
+        </th:block>
+      <!--  <input type="hidden" name="tel" th:value="${regMemberVO.tel[0]}">
+        <input type="hidden" name="tel" th:value="${regMemberVO.tel[1]}">
+        <input type="hidden" name="tel" th:value="${regMemberVO.tel[2]}">-->
+
+
+<table>
+    <tr>
+        <td class="sub1">
+            [[${regMemberVO.name}]] 회원님 가입을 환영합니다.
+        </td>
+    </tr>    
+    <tr>
+        <td>
+            아래 추가 정보를 입력해주세요.
+        </td>   
+    </tr>
+    <tr>
+        <td class="sub1">
+            관심 레슨
+        </td>
+        <td>
+            <input type="checkbox" name="lesson" value="수영" checked> 수영
+            <input type="checkbox" name="lesson" value="헬스"> 헬스
+            <input type="checkbox" name="lesson" value="요가"> 요가
+            <input type="checkbox" name="lesson" value="필라테스"> 필라테스
+        </td>   
+    </tr>
+    <tr>
+        <td class="sub1">
+            레슨에 참여한 적 있나요
+        </td>
+        <td>
+            <input type="radio" name="yesOrNo" value="예" checked> 예
+            <input type="radio" name="yesOrNo" value="아니오"> 아니오
+        </td>
+    </tr>
+    <tr>
+        <td class="sub1">
+            자기소개
+        </td>
+        <td>
+            <textarea name="intro" cols="30" rows="4"></textarea>
+        </td>
+    </tr>
+</table>
+<h4><input type="submit" value="입력완료"></h4>
+</form>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+    .container{
+        width: 600px;
+        margin: 0 auto;
+    }
+    table{
+        border: 1px solid black;
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+    }
+    tr,td{
+        border: 1px solid black;
+    }
+    .btn-div{
+        text-align: center;
+        margin-top: 16px;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <table>
+            <tr>
+                <td>학번</td>
+                <td>학생명</td>
+                <td>국어점수</td>
+                <td>영어점수</td>
+                <td>총점</td>
+            </tr>
+            <th:block th:each="stuInfo : ${stuList}">
+                <tr>
+                    <td>[[${stuInfo.stuNo}]]</td>
+                    <td><a th:href="@{stuDetail(stuNo=${stuInfo.stuNo})}">[[${stuInfo.stuName}]]</a></td>
+                    <td>[[${stuInfo.korScore}]]</td>
+                    <td>[[${stuInfo.engScore}]]</td>
+                    <td>[[${stuInfo.korScore + stuInfo.engScore}]]</td>
+                </tr>
+            </th:block>
+        </table>
+        <div class="btn-div">
+            <input type="button" value="학생등록" onclick="goReg()">
+        </div>
+    </div>
+    <script>
+        function goReg(){
+            location.href = 'regStu';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+    .container{
+        width: 700px;
+        margin: 0px auto;
+        text-align: center;
+    }
+    table{
+        width: 100%;
+        text-align: center;
+        border-collapse: collapse;
+    }
+    .sub_title{
+        font-weight: bold;
+        background: lightblue;
+    }
+    textarea{
+        resize: none;
+        font-size: x-large;
+    }
+    .test{
+        text-align: center;
+        border: 1px solid lightslategrey;
+    }
+    .test2{
+        text-align: left;
+        border: 1px solid lightslategrey;
+    }
+    .test3{
+        color: lightpink;
+        border: 1px solid lightslategrey;
+    }
+    .container2{
+        width: 700px;
+        margin: 0px auto;
+    }
+    .box{
+        border: 1px solid lightslategrey;
+        background: lightblue;
+    }
+    .box2{
+        border: 1px solid lightslategrey;
+        background: white;
+        text-align: right;
+    }
+    .box3{
+        border: 1px solid lightslategrey;
+        background: lightblue;
+        text-align: left;
+    }
+    .q{
+        border: 1px solid lightslategrey;
+    }
+    .q2{
+        text-align: left;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>자유게시판</h1>
+    <th:block th:if="${session.loginInfo != null}">
+        <h4 class="q2">
+        [[${session.loginInfo.memberName}]]님 반갑습니다.
+        </h4>
+    </th:block>
+    <th:block th:if="${session.loginInfo == null}">
+        <h4 class="q2">
+        로그인이 필요합니다.
+        </h4>
+    </th:block>
+<table class="q">
+    <tr>
+        <td class="sub_title">TITLE</td>
+        <td class="test2" colspan="3">[일상] [[${board.title}]]</td>
+        <td class="sub_title">No.</td>
+        <td class="test3">[[${board.boardNum}]].</td>
+    </tr>
+    <tr>
+        <td class="sub_title">ID</td>
+        <!-- if문 넣어서 admin이면 [관리자] 나오게 바꿔보기 -->
+        <td class="test2">
+            <th:block th:if="${board.writer == 'admin'}">
+            [관리자]
+            </th:block>
+            <th:block th:if="${board.writer != 'admin'}">
+            [새싹]
+            </th:block> [[${board.writer}]]
+        </td>
+        <td class="sub_title">Date</td>
+        <td class="test3">[[${board.createDate}]]</td>
+        <td class="sub_title">Read</td>
+        <td class="test3">&emsp;[[${board.readCnt}]]&emsp;</td>
+    </tr>
+    <tr>
+        <td class="sub_title"></td>
+        <td class="test2" colspan="5">
+            <textarea cols="60" readonly>[[${board.content}]]</textarea>
+        </td>
+    </tr>
+</table>
+<h4>
+    <!-- history 구현 -->
+<!-- <input type="button" value="뒤로" onclick="history.back(-1)"> -->
+<input type="button" value="뒤로" onclick="location.href='/board/listForm'">
+
+<!-- 수정, 삭제는 글 작성자이거나, 로그인한 사람이 관리자일때만 -->
+    <th:block th:if="${session.loginInfo != null}">
+        <th:block th:if="${session.loginInfo.memberId == board.writer 
+            or session.loginInfo.isAdmin == 'Y'}">
+            <!-- 글 수정하기 구현하기 -->
+            <input type="button" value="수정/아직 미구현" onclick="location.href='/board/updateBoardForm'">
+            <input type="button" value="삭제" th:onclick="goDelete([[${board.boardNum}]])">
+        </th:block>
+    </th:block>
+</h4>
+</div>
+<!-- 댓글 기능 구현하기 -->
+<!-- 로그인해야만 보이도록 하기 -->
+<div class="container2">
+    <table>
+        <form action="/reply/regReply" method="post">
+        <tr class="box">
+            <td class="sub_title" colspan="3">
+                <th:block th:if="${session.loginInfo != null}">
+                    <a href="/member/logout">[LOGOUT]</a>
+                </th:block>
+                <th:block th:if="${session.loginInfo == null}">
+                    <a href="/member/home">[LOGIN]</a>
+                </th:block>
+            </td>
+        </tr>
+        <tr class="box">
+            <td>
+                <input type="hidden" name="boardNum" th:value="${board.boardNum}">
+                <input type="text" name="content" size="70">
+                <input type="submit" value="댓글등록" onclick="goReply()">
+            </td>
+        </tr>
+        </form>
+    </table>
+    <br>
+<!-- 댓글목록 -->
+<!-- replyVO 불러옴 -->
+<table>
+    <div th:each="reply : ${replyList}">
+        <tr class="box3">
+            <td>&emsp;[[${reply.writer}]] : [[${reply.content}]]</td>
+        </tr>
+        <tr class="box2">
+            <td>
+            [[${reply.createDate}]]&emsp;
+            <input type="button" value="삭제">
+            </td>
+        </tr>
+    </div>
+</table>
+</div>
+<script>
+    //java 변수 선언 int a;
+
+    // 기존에 쓰던 변수 선언 문법
+    //html에서는 var a;  // var aa = 10; var bb = 'h';
+
+    //추천하는 방식
+    //html에서는 const b = 10; // 변하지 않는 값을 저장할 때는 const
+                //b = 20; 오류발생 (b!=b)
+    //html에서는 let c = 10; // 변하는 값을 저장할 때는 let
+                // c = 20; 오류x
+
+        const name = '홍';
+        const num1 = 10;
+        const num2 = 20;
+        console.log('테스트 텍스트입니다.');
+        console.log(name + '이라는 사람은 국어점수가' + num1 + '영어점수가' + num2 + '입니다.');
+        // 빽틱
+        console.log(`${name}이라는 사람은 국어점수가 ${num1} 영어점수가 ${num2}입니다.`);
+
+    function goDelete(boardNum){
+        // location.href='/board/delete?boardNum=' + boardNum;
+        location.href=`/board/delete?boardNum=${boardNum}`;
+    }
+
+    function goReply(){
+        location.href='/board/reply';
+    }
+</script>
+</body>
+</html>

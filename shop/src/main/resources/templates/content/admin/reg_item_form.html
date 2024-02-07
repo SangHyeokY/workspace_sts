@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragment/admin_layout}" >
+
+<th:block layout:fragment="content_css">
+    <!-- html 파일이 열릴때 같이 실행되는 css -->
+    <!-- <link rel="stylesheet" href="/"> -->
+</th:block>
+<!-- ---------------------------------------------------------------- -->
+<th:block layout:fragment="contentFragment">
+    <!-- html 코드 작성 -->
+    <form class="row g-3" action="/admin/regItem" method="post" enctype="multipart/form-data">
+
+        <div class="col-md-3">
+            <label for="" class="form-label">&nbsp;<strong>제품 카테고리</strong></label>
+            <select id="" class="form-select" name="cateCode" 
+            style="box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);">
+              <option th:each="category : ${categoryList}" 
+              th:value="${category.cateCode}">[[${category.cateName}]]</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+          <label for="inputName" class="form-label">&nbsp;<strong>제품 이름</strong></label>
+          <input type="text" class="form-control" id="inputName" name="itemName" style="box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);">
+        </div>
+        <div class="col-md-3">
+          <label for="inputPrice" class="form-label">&nbsp;<strong>제품 가격 (원)</strong></label>
+          <input type="text" class="form-control" id="inputPrice" name="itemPrice" style="box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);">
+        </div>
+        <div class="col-md-9">
+          <label for="" class="form-label">&nbsp;<strong>제품 소개</strong></label>
+          <textarea class="form-control" id="" rows="5" name="itemIntro" style="box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);"></textarea>
+          <!-- <input type="textarea" class="form-control" id=""> -->
+        </div>
+      
+        <!-- 사진 등록하기 -->
+        <div class="col-md-3">
+              <label for="" class="form-label">&nbsp;<strong>제품 대표 이미지</strong></label>
+              <input class="form-control" type="file" id="mainImg" name="mainImg">
+                <div class="header-div"></div>  
+              <label for="" class="form-label">&nbsp;<strong>제품 상세 이미지</strong></label>
+              <input class="form-control" type="file" id="subImgs" name="subImgs" multiple>
+        </div>
+
+        <div class="col-12">
+          <button type="submit" class="btn btn-dark">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
+              <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
+            </svg>
+            &nbsp;제품 등록하기
+          </button>
+        </div>
+
+      </form>
+</th:block>
+<!-- ---------------------------------------------------------------- -->
+<th:block layout:fragment="content_js">
+    <!-- html 파일이 열릴때 같이 실행되는 js -->
+    <!-- <script src="/"></script> -->
+</th:block>
+</html>

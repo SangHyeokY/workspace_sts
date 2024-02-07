@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table id="my-table">
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td><input type="text" value="1"></td>
+            </tr>
+            <tr id= "my-tr">
+                <td>2</td>
+                <td><input type="text" value="2"></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><input type="text" value="3"></td>
+            </tr>
+        </tbody>
+    </table>
+<script>
+    //id속성이 my-table인 태그의 자식 태그 선택
+    const tableTag = document.querySelector('#my-table');
+  
+    //자식 태그에 접근
+    console.log(tableTag.children);
+    console.log(tableTag.children[0]);
+
+    //테이블 태그의 자식의 자식 태그 선택
+    //children[0]는 tbody임
+    console.log(tableTag.children[0].children);
+
+    //부모 태그에 접근
+    const trTag = document.querySelector('#my-tr');
+    console.log(trTag.parentElement);
+
+
+</script>
+</body>
+</html>

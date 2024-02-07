@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- num1, num2, num3 -->
+    <input type="text" id="num1">
+    <input type="password" class="num2">
+    <input type="checkbox" value="1" class="num3">
+    <input type="checkbox" value="2" class="num3">
+    <input type="checkbox" value="3" class="num3">
+    <input type="button" value="버튼" onclick="showData()">
+
+    <script>
+        //alert(111);
+
+        //태그 선택하기(접근하기)
+        //1. 아이디 속성이 num1인 태그를 선택
+        const tag1 = document.querySelector('#num1');
+        console.log(tag1);
+
+        //2. class속성이 num2인 태그를 선택
+        const tag2 = document.querySelector('.num2');
+        console.log(tag2);
+
+        //3. class속성이 num3인 태그를 선택
+        //같은 class속성을 가진 태그가 여러개라면 
+        //가장 처음 선언된 태그만 선택함
+        const tag3 = document.querySelector('.num3');
+        console.log(tag3);
+
+        //4. class속성이 num3인 태그 모두를 선택
+        const tag4 = document.querySelectorAll('.num3');
+        console.log(tag4);
+        //0번째 저장된 태그 출력
+        console.log(tag4[0]);
+        //tag4의 전체 데이터 출력
+        //int, string 대신에 let, const
+        for(let i = 0; i < tag4.length; i++){
+            console.log(tag4[i])
+        }
+        for(const e of tag4){
+            console.log(e);
+        }
+
+        // dom객체(태그) 컨트롤
+        function showData(){
+
+
+        }
+    </script>
+</body>
+</html>

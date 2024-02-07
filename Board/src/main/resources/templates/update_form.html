@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+    .container{
+        width: 700px;
+        margin: 0 auto;
+    }
+    table{
+        width: 100%;
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: center;
+    }
+    tr, td{
+        border: 1px solid black;
+    }
+    .btn-div{
+        text-align: center;
+    }
+    textarea{
+        resize: none;
+        text-align: left;
+    }
+    .set{
+        text-align: left;
+    }
+</style>
+</head>
+<body>
+    <form action="/updateBoard" method="post">
+<div class="container">
+<table>
+    <tr>
+        <td>글번호</td>
+        <td class="set">
+            <input type="text" name="boardNum" th:value="${board.boardNum}" readonly>
+        </td>
+    </tr>
+    <tr>
+        <td>제목</td>
+        <td class="set">
+            <input type="text" name="boardTitle" th:value="${board.boardTitle}">
+        </td>
+    </tr>
+    <tr>
+        <td>작성자</td>
+        <td class="set">
+            <input type="text" name="writer" th:value="${board.writer}" readonly>
+        </td>
+    </tr>
+    <tr>
+        <td>작성일</td>
+        <td class="set">
+            <input type="date" name="createDate" th:value="${board.createDate}" readonly>
+        </td>
+    </tr>
+    <tr>
+        <td>내용</td>
+        <td class="set">
+        <textarea cols="50" rows="10" name="boardContent" placeholder="최대 50글자까지 작성해주세요.">[[${board.boardContent}]]</textarea></td>
+    </tr>
+</table>
+<br>
+<div class="btn-div">
+    <input type="submit" value="수정">
+</div>
+</div>
+</form>
+</body>
+</html>

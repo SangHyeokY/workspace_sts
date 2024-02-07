@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="stuMapper">
+    <resultMap id="stu" type="com.green.StudentManager.vo.StuVO">
+        <result column="STU_NO" property="stuNo"/>
+        <result column="STU_NAME" property="stuName"/>
+        <result column="KOR_SCORE" property="korScore"/>
+        <result column="ENG_SCORE" property="engScore"/>
+        <result column="INTRO" property="intro"/>
+    </resultMap>
+
+	<insert id="insertStu">
+        INSERT INTO STU (
+            STU_NO
+            , STU_NAME
+            , KOR_SCORE
+            , ENG_SCORE
+            , INTRO
+        ) VALUES (
+        #{stuNo}
+        , #{stuName}
+        , #{korScore}
+        , #{engScore}
+        , #{intro}
+        )
+    </insert>
+    <select id="selectStuList" resultMap="stu">
+        SELECT STU_NO
+            , STU_NAME
+            , KOR_SCORE
+            , ENG_SCORE
+        FROM STU
+    </select>
+
+<!--내가 만들어넣은거 / 수업 중 수정-->
+    <select id="selectStu" resultMap="stu">
+        SELECT STU_NO
+        , STU_NAME
+        , KOR_SCORE
+        , ENG_SCORE
+        , INTRO
+        FROM STU
+        WHERE STU_NO = #{stuNo}
+    </select>
+
+<!--내가 만들어넣은거-->
+    <select id="deleteStu" resultMap="stu">
+        DELETE FROM STU
+        WHERE STU_NO = #{stuNo}
+    </select>
+
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

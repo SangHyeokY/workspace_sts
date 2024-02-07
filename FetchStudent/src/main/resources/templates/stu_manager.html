@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+    <link rel="stylesheet" href="/stu_manager.css">
+</head>
+<body>
+    <table class="container">
+        <!-- 테이블의 열그룹 지정 -->
+        <colgroup>
+            <col width="50%">
+            <col width="50%">
+        </colgroup>
+        <tbody>
+            <tr>
+                <td>
+                    <div>
+                        <div>
+                            <!-- 변경 버튼 -->
+                            <!-- <select onchange="goSelect()" id="class-selector"> -->
+                        <h4>[반이름 선택]
+                            <select onchange="fetchSelect()" id="class-selector">
+                                <option value="0" th:selected="${stuVO.classCode == 0}">전체</option>
+                                <th:block th:each="classInfo : ${classList}">
+                                    <option th:value="${classInfo.classCode}" 
+                                        th:selected="${stuVO.classCode == classInfo.classCode}">
+                                        [[${classInfo.className}]]</option>
+                                </th:block>
+                            </select>
+                        </h4>
+                        </div>
+                        <div>
+                            <table id="stu-list-table">
+                                <colgroup>
+                                    <col width="20%">
+                                    <col width="30%">
+                                    <col width="20%">
+                                    <col width="*">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <td nowrap>No</td>
+                                        <td nowrap>반이름</td>
+                                        <td nowrap>학번</td>
+                                        <td nowrap>학생명</td>
+                                    </tr>
+                                </thead>
+                                <!-- 게시글 삭제시 여기 tbody를 삭제 -->
+                                <tbody>
+                                    <tr th:each="stuInfo, state : ${stuList}">
+                                        <td>[[${#lists.size(stuList) - state.index}]]</td>
+                                        <td>[[${stuInfo.className}]]</td>
+                                        <td>[[${stuInfo.stuNum}]]</td>
+                                        <!-- 이걸 비동기로 만들기 -->
+                                        <!-- <td><a th:href="@{/showStuInfo}">[[${stuInfo.stuName}]]</a></td> -->
+                                        <!--  onclick="showStuInfo()" -->
+                                        <td>
+                                            <span th:onclick="goDetail([[${stuInfo.stuNum}]])" id="name-span">
+                                                [[${stuInfo.stuName}]]
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br>
+                            <input type="button" value="새로고침" onclick="location='/'">
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <!-- 여기에다가 출력 -->
+                    <div class="stu-detail-div">
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script src="/stu_manager.js"></script>
+</body>
+</html>

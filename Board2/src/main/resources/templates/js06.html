@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="버튼튼" id="btn"><br>
+    <input type="text" id="btn2"> <!-- onkeyup -->
+<script>
+    //이벤트 처리. 함수가 통으로 들어가짐
+    const btn = document.querySelector('#btn');
+    btn.addEventListener('click', function(){
+        alert("뽈롱");
+        });
+        // function test(){
+        //     alert("뽈롱");
+        // }
+  
+    //input태그에 키보드로 값을 입력할 때마다
+    //입력한 값을 console에 출력시키는 이벤트 코드를 작성
+    const btn2 = document.querySelector('#btn2');
+    btn2.addEventListener('keyup', function(){
+        console.log(btn2.value);
+        });
+</script>
+</body>
+</html>

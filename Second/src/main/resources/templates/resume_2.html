@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+    textarea{
+        resize: none;
+    }
+    table{
+        border-color: black;
+        border-width: 3px;
+        border-collapse: collapse;
+    }
+    h4{
+        font-style: italic;
+    }
+</style>
+</head>
+<body>
+<form action="r3" method="post">
+    <input type="hidden" name="name" th:value="${name}">
+    <input type="hidden" name="tel" th:value="${tel}">
+<div><h2>이력서 정보</h2></div>
+<div><h4>학력</h4></div>
+<select name="grade">
+    <option value="대졸">대졸</option>
+    <option value="대학졸업예정">대학졸업예정</option>
+    <option value="전문대졸">전물대졸</option>
+    <option value="고졸">고졸</option>
+</select>
+<input type="text" name="school" placeholder="학교명"><br>
+<div><h4>지원 구분</h4></div>
+<input type="radio" checked name="type" value="신입"> 신입
+<input type="radio" name="type" value="경력"> 경력<br>
+<div><h4>자격정보</h4></div>
+<table>
+    <tr>
+        <td>자격증명</td>
+        <td>취득일자</td>
+        <td>발행기관</td>
+    </tr>
+    <tr>
+        <td><input type="text" name="certiName" size="10"></td>
+        <td><input type="date" name="certiDate"></td>
+        <td><input type="text" size="10" name="certiAt"></td>
+    </tr>
+</table>
+<div><h4>경력정보</h4></div>
+<table>
+    <tr>
+        <td>회사명</td>
+        <td>담당업무</td>
+        <td>경력기간</td>
+    </tr>
+    <tr>
+        <td><input type="text" name="company" size="10"></td>
+        <td><input type="text" name="job" size="10"></td>
+        <td><input type="text" name="year" size="1">년
+            <input type="text" name="month" size="1">개월
+        </td>
+    </tr>
+</table>
+<div><h4>자기소개</h4></div>
+<textarea name="intro" cols="50" rows="3"></textarea><br>
+<input type="submit" value="등록">
+</form>
+</body>
+</html>

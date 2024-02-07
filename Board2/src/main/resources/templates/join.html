@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+    .container{
+        margin: 0px auto;
+        text-align: center;
+    }
+    table{
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+    }
+    .sub_title{
+    font-weight: bold;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>회원가입</h1>
+    <h4>◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆</h4>
+    <form action="/member/join" method="post">
+<table>
+    <tr>
+        <td class="sub_title">ID&emsp;</td>
+        <td><input type="text" name="memberId" placeholder="최대 20글자까지 입력가능"></td>
+    </tr>
+    <tr>
+        <td class="sub_title">PW&emsp;</td>
+        <td><input type="password" name="memberPw" placeholder="최대 20글자까지 입력가능"></td>
+    </tr>
+    <tr>
+        <td class="sub_title">이름&emsp;</td>
+        <td><input type="text" name="memberName" placeholder="필수로 입력"></td>
+    </tr>
+    <tr>
+        <td class="sub_title">성별&emsp;</td>
+        <td>
+            <input type="radio" name="gender" value="남" checked>남
+            <input type="radio" name="gender" value="여">여
+        </td>
+    </tr>
+    <tr>
+        <td class="sub_title">이메일&emsp;</td>
+        <td><input type="text" name="memberEmail" size="5" placeholder="Study">
+            @
+            <!-- 일단 구현안함 -->
+            <select name="memberEmail2">
+                <option value="gmail.com" selected>gmail.com</option>
+                <option value="naver.com">naver.com</option>
+                <option value="daum.net">daum.net</option>
+                <option value="미구현">미구현</option>
+            </select>
+        </td>
+    </tr>
+</table>
+<h4>◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆</h4>
+    <input type="button" value="뒤로" onclick="goBack()">
+    <input type="submit" value="가입하기">
+</form>
+</div>
+<script>
+    function goBack(){
+        location.href='/member/home';
+    }
+</script>
+</body>
+</html>

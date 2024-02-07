@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <th:block layout:fragment="content_css">
+        <link rel="stylesheet" href="/css/menu.css">
+    </th:block>
+    <th:block th:fragment="menuFragment">
+        <h3 class="test">menu [[${name}]]</h3>
+        <table>
+            <tr>
+                <td><input type="button" value="1"></td>
+                <td><input type="button" value="2"></td>
+                <td><input type="button" value="3"></td>
+                <td><input type="button" value="4"></td>
+            </tr>
+        </table>
+    </th:block>
+</html>

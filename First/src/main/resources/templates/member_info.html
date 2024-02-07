@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+    <style>
+        table{
+            margin-left: auto;
+            margin-right: auto;
+            width: 500px;
+            border: 1px solid black;
+            border-collapse : collapse;
+            background-color: lightcyan;
+        }
+        tr, td{
+            border: 1px solid black;
+        }
+        h4{
+           text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+
+<table>
+    <tr>
+        <td>아이디</td>
+        <td>[[${regMemberVO.id}]]</td>
+        <td>이름</td>
+        <td>[[${regMemberVO.name}]]</td>
+
+    </tr>
+    <tr>
+        <!--버그남-->
+        <td>연락처</td>
+        <td>
+            <th:block th:each="item : ${regMemberVO.tel}">
+            [[${item}]]
+            </th:block>
+        </td>
+        <td>이메일</td>
+        <td>[[${regMemberVO.email}]]</td>
+    </tr>
+    <tr>
+        <td>생일</td>
+        <td colspan="3">[[${regMemberVO.birth}]]</td>
+
+    </tr>
+    <tr>
+        <!--버그남-->
+        <td>관심레슨</td>
+        <td colspan="3">
+            <th:block th:each="item : ${regMemberVO.lesson}">
+            [[${item}]]
+            </th:block>
+        </td>
+
+    </tr>
+    <tr>
+        <td>자기소개</td>
+        <td colspan="3">[[${regMemberVO.intro}]]</td>
+    </tr>
+</table>
+<h4><input type="submit" value="뒤로 가기"><input type="submit" value="회원등록"></h4>
+</body>
+</html>

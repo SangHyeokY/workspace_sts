@@ -1,0 +1,53 @@
+.container{
+    width: 90%;
+    margin: 0 auto;
+    border: 1px black solid;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+/* > : 자식 태그 */ /* ' '(공백) : 자손 태그 */
+.container > tbody > tr, .container > tbody > tr > td{
+    border: 1px black solid;
+    height: 500px;
+    vertical-align: top;
+}
+
+#stu-list-table{
+    border: 1px black solid;
+    border-collapse: collapse;
+    width: 90%;
+    margin: 0 auto;
+}
+
+#stu-list-table tr, #stu-list-table td{
+    border: 1px black solid;
+}
+
+/* :hover  : 마우스를 올리면~~~ */
+#stu-list-table tr:hover{
+    background-color: #dddddd;
+}
+
+.stu-detail-div table{
+    border: 1px black solid;
+    border-collapse: collapse;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.stu-detail-div table tr, .stu-detail-div table td{
+    border: 1px black solid;
+}
+
+.stu-detail-div > div:first-child{
+    margin-bottom: 70px;
+}
+#name-span:hover{
+    cursor: pointer;
+}
+
+.scoreInput{
+    width: 90%;
+}

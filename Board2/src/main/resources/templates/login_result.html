@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+
+    <!-- 로그인 실패 -->
+    <th:block th:if="${session.loginInfo == null}">
+        <script>
+            alert('ID 또는 PW가 올바른지 다시 확인해 주세요.');
+            location.href='/member/home';
+        </script>
+    </th:block>
+
+    <!-- 로그인 성공 -->
+    <th:block th:if="${session.loginInfo != null}">
+        <script>
+            alert('환영합니다.');
+            location.href='/board/listForm';
+        </script>
+    </th:block>
+
+</body>
+</html>

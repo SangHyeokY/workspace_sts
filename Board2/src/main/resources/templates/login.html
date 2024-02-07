@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+    .container{
+     margin: 0px auto;
+     text-align: center;
+    }
+    table{
+     margin-left: auto;
+     margin-right: auto;
+     text-align: left;
+    }
+    .sub_title{
+     font-weight: bold;
+    }
+</style>
+</head>
+<body>
+<form action="/member/login" method="post">
+    <div class="container">
+        <h1>게시판&회원가입 STUDY</h1>
+        <h4>◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆</h4>
+        <table>
+            <tr>
+                <td noWrap class="sub_title">ID&emsp;</td>
+                <td><input type="text" size="20" placeholder="SpringStudy" name="memberId"></td>
+            </tr>
+            <tr>
+                <td noWrap class="sub_title">PW&emsp;</td>
+                <td><input type="password" size="20" placeholder="PassWord" name="memberPw"></td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="로그인">
+        <input type="button" value="회원가입" onclick="goJoin()">
+        <th:block th:if="${session.loginInfo != null}">
+            <h4>
+            [[${session.loginInfo.memberName}]]님 반갑습니다.
+            <a href="/member/logout">[LOGOUT]</a>
+            </h4>
+        </th:block>
+        <th:block th:if="${session.loginInfo == null}">
+            <h4>
+            로그인해주세요.
+            </h4>
+        </th:block>
+        <h4>◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆</h4>
+        <input type="button" value="자유게시판" onclick="goBoardList()">
+        <input type="button" value="ㅣTESTㅣ" onclick="goTest()">
+    </div>
+</form>
+<!--함수 만들기-->
+<script>
+    function goJoin(){
+        location.href='/member/joinForm';
+    }
+</script>
+<script>
+    function goBoardList(){
+        location.href='/board/listForm';
+    }
+</script>
+<script>
+    function goTest(){
+        location.href='/test/page1';
+    }
+
+</script>
+</body>
+</html>

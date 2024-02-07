@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="input1" value="10">
+
+    <script>
+        //선언한 태그의 속성 값 읽기
+        const tag1 = document.querySelector('#input1');
+
+        //문법 : 선택한 태그.속성명;
+        console.log(tag1.value);
+        console.log('id = ' + tag1.id);
+        console.log(`type = ${tag1.type}`);
+
+        //속성값 변경하기
+        tag1.value = 20;
+    </script>
+</body>
+</html>

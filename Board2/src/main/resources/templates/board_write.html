@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+    .container{
+        width: 700px;
+        margin: 0px auto;
+        text-align: center;
+    }
+    table{
+        width: 100%;
+        text-align: center;
+        background: lightblue;
+        border-collapse: collapse;
+    }
+
+    .sub_title{
+        font-weight: bold;
+    }
+    h4{
+        text-align: center;
+    }
+    textarea{
+        resize: none;
+        font-size: x-large;
+    }
+    .sub_content{
+        text-align: left;
+        color: lightpink;
+        background: white;
+        border: 1px solid lightslategrey;
+    }
+    .q{
+        border: 1px solid lightslategrey;
+    }
+    .q2{
+        text-align: left;
+    }
+</style>
+</head>
+<body>
+<form action="/board/boardWrite" method="post">
+<div class="container">
+    <h1>자유게시판</h1>
+    <th:block th:if="${session.loginInfo != null}">
+        <h4 class="q2">
+        [[${session.loginInfo.memberName}]]님 반갑습니다.
+        </h4>
+    </th:block>
+    <th:block th:if="${session.loginInfo == null}">
+        <h4 class="q2">
+        로그인이 필요합니다.
+        </h4>
+    </th:block>
+    <!-- 로그인 했다면 보이는 정보 / 안했다면 정보 안보임 -->
+    <!-- <th:block th:if=""> -->
+<table class="q">
+<!-- <tr>
+    <td class="sub_title">No.</td>
+    <td class="sub_content">[[${session.boardNum}]]</td>
+</tr> -->
+<tr>
+    <td class="sub_title">TITLE</td>
+    <td class="sub_content"><input type="text" name="title" value="제목없음"></td>
+</tr>
+<!-- <tr>
+    <td class="sub_title">작성자</td>
+    <td class="sub_content">[[${session.writer}]]</td>
+</tr> -->
+<!-- <tr>
+    <td class="sub_title">작성일</td>
+    <td class="sub_content">[[${session.createDate}]]</td>
+</tr> -->
+<tr>
+    <td class="sub_title"></td>
+    <td class="sub_content">
+        <textarea name="content" cols="60" rows="15"></textarea>
+    </td>
+</tr>
+</table>
+<!-- </th:block> -->
+<h4>
+    <input type="button" value="뒤로" onclick="goBack()">
+    <input type="submit" value="글등록">
+</h4>
+<br>
+<table class="q">
+    <tr>
+        <td class="sub_title" colspan="6">
+            <th:block th:if="${session.loginInfo != null}">
+                    <a href="/member/logout">[LOGOUT]</a>
+            </th:block>
+             <th:block th:if="${session.loginInfo == null}">
+                    <a href="/member/home">[LOGIN]</a>
+            </th:block>
+        </td>
+    </tr>
+</table>
+</div>
+</form>
+<script>
+    function goBack(){
+        location.href='/board/listForm';
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+                xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title></title>
+
+<th:block layout:fragment="content_css">
+
+</th:block>
+
+<style>
+    h3{
+        background-color: aqua;
+    }
+</style>
+</head>
+<body>
+    <h3>layout 파일입니다</h3>
+    <div>
+        <th:block th:replace="fragment/menu::menuFragment"></th:block>
+    </div>
+    <div>
+        <th:block th:replace="fragment/side_menu::sideMenuFragment"></th:block>
+    </div>
+    <!-- <div>
+        <th:block th:replace="fragment/list::listFragment"></th:block>
+    </div> -->
+    <div>
+        <th:block layout:fragment="contetnFragment"></th:block>
+    </div>
+    <div>
+        <th:block th:replace="fragment/footer::footerFragment"></th:block>
+    </div>
+</body>
+</html>
