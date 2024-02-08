@@ -112,7 +112,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="bought, state : ${buyList}" onclick="showModal()">
+                    <tr th:each="bought, state : ${buyList}" th:onclick="showModal([[${bought.buyCode}]])">
                         <td>[[${#lists.size(buyList) - state.index}]]</td>
                         <td>[[${bought.buyCode}]]</td>
                         <td>[[${bought.memberId}]]</td>
@@ -126,7 +126,7 @@
     <!-- ///////////////////////////////////////////////////////////// -->
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="buy-detail-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade modal-lg" id="buy-detail-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -144,15 +144,15 @@
                         <tbody>
                             <tr>
                                 <td><strong>구매번호</strong></td>
-                                <td id="buyCode-td"></td>
+                                <td id="modal-buyCode"></td>
                                 <td><strong>구매자ID</strong></td>
-                                <td id="memberId-td"></td>
+                                <td id="modal-memberId"></td>
                             </tr>
                             <tr>
                                 <td><strong>구매금액</strong></td>
-                                <td id="buyPrice-td"></td>
+                                <td id="modal-buyPrice"></td>
                                 <td><strong>구매일자</strong></td>
-                                <td id="buyDate-td"></td>
+                                <td id="modal-buyDate" noWrap></td>
                             </tr>
                         </tbody>
                     </table>
@@ -172,14 +172,8 @@
                                 <td><strong>결제금액</strong></td>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="modal-tbody">
                             <!-- buyVo -->
-                            <tr th:each="buyDetail : ${buyDetailList}">
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>[[${buyDetail.buyPrice}]]</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>

@@ -103,12 +103,22 @@ public class AdminController {
         //상세구매 내역 조회
         @ResponseBody
         @PostMapping("/selectBuyDetail")
-        public List<BuyVO> selectBuyDetail(){
+        public BuyVO selectBuyDetail(@RequestParam(name="buyCode") int buyCode){
+
             //구매 상세 내역 조회 (비동기)
-            List<BuyVO> detailList = adminService.selectBuyInfoList();
-            return detailList;
+            BuyVO buyVO = adminService.selectBuyDetail(buyCode);
+
+            return buyVO;
         }
 
+    //제품 정보 변경, 제품목록 조회
+    @GetMapping("/updateItem")
+    public String selectItemBeforeUpdate(Model model){
+        //목록조회
+        List<ItemVO> updateList = adminService.selectItemBeforeUpdate();
+        model.addAttribute("updateList", updateList);
 
+        return "content/admin/update_item";
+    }
 
 }

@@ -39,4 +39,20 @@ public class AdminServiceImpl implements AdminService{
     public List<BuyVO> selectBuyInfoList() {
        return sqlSession.selectList("adminMapper.selectBuyInfoList");
     }
+
+    //구매기록 상세 조회 (비동기)
+    @Override
+    public BuyVO selectBuyDetail(int buyCode){
+        return sqlSession.selectOne("adminMapper.selectBuyDetail", buyCode);
+    }
+
+    //제품 정보 변경, 제품목록 조회
+    @Override
+    public List<ItemVO> selectItemBeforeUpdate() {
+        return sqlSession.selectList("adminMapper.selectItemBeforeUpdate");
+    }
+
+
+
+
 }

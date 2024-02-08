@@ -54,7 +54,7 @@
                         </th:block>
                         <th:block th:unless="${#lists.isEmpty(cartList)}">
                             <tr th:each="cart, state : ${cartList}">
-                                <td>[[${1 + state.index}]]</td>
+                                <td>[[${#lists.size(cartList) - state.index}]]</td>
                                 <!--  ///////////////////////////////////////////체크박스///////////////////////////////// -->
                                 <td>
                                     <input th:value="${cart.cartCode}" type="checkbox" class="form-check-input chk"

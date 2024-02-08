@@ -54,14 +54,44 @@
     </insert>
 
 
-    <!-- 구매기록 조회 (관리자용) -->
+
+    <!-- 구매 목록 조회  (관리자용) -->
     <select id="selectBuyInfoList" resultMap="buyMapper.buy">
         SELECT BUY_CODE
-            , MEMBER_ID
-            , BUY_PRICE
-            , BUY_DATE
-        FROM SHOP_BUY
+        , MEMBER_ID
+        , BUY_PRICE
+        , BUY_DATE
+        FROM shop_buy
         ORDER BY BUY_DATE DESC
+    </select>
+
+    <!-- 구매 목록 조회 -> 상세구매정보 조회 (관리자용) -->
+    <select id="selectBuyDetail" resultMap="buyMapper.buy">
+        SELECT BUY.BUY_CODE
+                , MEMBER_ID
+                , BUY_PRICE
+                , BUY_DATE
+                , BUY_CNT
+                , TOTAL_PRICE
+                , ITEM_NAME
+                , ATTACHED_FILE_NAME
+        FROM shop_buy Buy
+        INNER JOIN buy_detail DETAIL
+        ON BUY.BUY_CODE = DETAIL.BUY_CODE
+        INNER JOIN shop_item ITEM
+        ON ITEM.ITEM_CODE = DETAIL.ITEM_CODE
+        INNER JOIN ITEM_IMAGE IMG
+        ON IMG.ITEM_CODE = ITEM.ITEM_CODE
+        WHERE IS_MAIN = 'Y'
+        AND BUY.BUY_CODE = #{buyCode}
+    </select>
+
+<!-- 상품 목록 -->
+    <select id="selectItemBeforeUpdate" resultMap="itemMapper.item">
+        SELECT ITEM_CODE
+        , ITEM_NAME
+        , ITEM_STOCK
+        FROM SHOP_ITEM
     </select>
 
 

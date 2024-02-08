@@ -21,4 +21,9 @@ public interface AdminService {
     //구매기록 조회 (관리자용)
     List<BuyVO> selectBuyInfoList();
 
+    //구매목록 상세조회 (비동기)
+    BuyVO selectBuyDetail(int buyCode);
+
+    //제품 정보 변경, 제품목록 조회
+    List<ItemVO> selectItemBeforeUpdate();
 }
