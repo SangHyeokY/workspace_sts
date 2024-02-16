@@ -9,4 +9,7 @@ public interface MemberService {
 
     //로그인
     MemberVO login(MemberVO memberVO);
+
+    //내정보 보기
+    MemberVO selectMyInfo(String memberId);
 }

@@ -9,9 +9,9 @@
     <div class="col text-start">
       <span>
         <th:block th:if="${session.loginInfo != null}">
-          [<strong>[[${session.loginInfo.memberId}]]</strong>님 <font color="red"><strong>ON</strong></font>]
+          [<strong>[[${session.loginInfo.memberId}]]</strong>님]
           <th:block th:if="${session.loginInfo.memberRoll == 'ADMIN'}">
-            <span  class="pointer-span" onclick="location.href='/admin/regItemForm';">관리자 메뉴</span>
+            <span  class="pointer-span" onclick="location.href='/admin/adminHistory';">관리자 메뉴</span>
           </th:block>
         </th:block>
         <th:block th:if="${session.loginInfo == null}">
@@ -61,23 +61,23 @@
         <div class="modal-body">
             <form class="row g-3" id="join-form" action="/member/join" method="post">
                 <div class="col-12">
-                    <label for="" class="form-label">아이디</label>
+                    <label for="" class="form-label">&nbsp;<strong>아이디</strong></label>
                     <input type="text" class="form-control" id="memberId" name="memberId">
                 </div>
                 <div class="col-12">
-                    <label for="" class="form-label">비밀번호</label>
+                    <label for="" class="form-label">&nbsp;<strong>비밀번호</strong></label>
                     <input type="password" class="form-control" id="memberPw" name="memberPw">
                 </div>
                 <div class="col-12">
-                    <label for="" class="form-label">비밀번호 재입력</label>
+                    <label for="" class="form-label">&nbsp;<strong>비밀번호 재입력</strong></label>
                     <input type="password" class="form-control" id="">
                 </div>
                 <div class="col-12">
-                    <label for="" class="form-label">이름</label>
+                    <label for="" class="form-label">&nbsp;<strong>이름</strong></label>
                     <input type="text" class="form-control" id="" name="memberName">
                 </div>
                 <div class="col-4">
-                    <label for="" class="form-label">전화번호</label>
+                    <label for="" class="form-label">&nbsp;<strong>전화번호</strong></label>
                     <select id="" class="form-select" name="memberTel">
                         <option selected value="010">010</option>
                         <option value="011">011</option>
@@ -92,7 +92,7 @@
                     <input type="text" class="form-control" id="" name="memberTel">
                 </div>
                 <div class="col-md-6">
-                  <label for="" class="form-label">이메일</label>
+                  <label for="" class="form-label">&nbsp;<strong>이메일</strong></label>
                   <input type="email" class="form-control" id="" name="memberEmail">
                 </div>
                 <div class="col-md-6">
@@ -105,12 +105,12 @@
                     </select>
                 </div>
                 <div class="col-8">
-                  <label for="" class="form-label">주소</label>
+                  <label for="" class="form-label">&nbsp;<strong>주소</strong></label>
                   <input type="text" class="form-control" id="postCode" readonly name="postCode">
                 </div>
                 <div class="col-4 d-grid">
                     <label for="" class="form-label">&nbsp;</label>
-                    <input type="button" class="btn btn-dark" id="" value="검색" onclick="searchAddress()">
+                    <input type="button" class="btn btn-primary" id="" value="검색" onclick="searchAddress()">
                 </div>
                 <div class="col-12">
                     <input type="text" class="form-control" id="address" readonly name="memberAddr">
@@ -133,7 +133,7 @@
         </div>
 <!-- ------------------------------------------------------------------------------ -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" onclick="join()">가입완료</button>
+          <button type="button" class="btn btn-dark" onclick="join()">가입완료</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
         </div>
       </div>

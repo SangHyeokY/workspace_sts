@@ -13,125 +13,132 @@
         <div class="col">
             <div class="row">
                 <div class="col">
-                    <table style="background-color: none;">
-                        <colgroup>
-                            <col width="15%">
-                            <col width="*">
-                            <col width="15%">
-                        </colgroup>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="row mb-3" style="padding-right: 20px;">
-                                        <div class="col">
-                                            <select class="form-select"
-                                                style="box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);">
-                                                <option value="1" selected>구매번호</option>
-                                                <option value="2">구매자명</option>
-                                            </select>
+                    <form action="/admin/adminHistory" method="post">
+                        <table style="background-color: none; width: 100%;">
+                            <colgroup>
+                                <col width="15%">
+                                <col width="*">
+                                <col width="15%">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="row mb-3" style="padding-right: 20px;">
+                                            <div class="col">
+                                                <select class="form-select" name="searchType"
+                                                    style="box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);">
+                                                    <option value="BUY_CODE"
+                                                        th:selected="${searchBuyVO.searchType == null or searchBuyVO.searchType == 'BUY_CODE'}">
+                                                        구매번호</option>
+                                                    <option value="MEMBER_ID"
+                                                        th:selected="${searchBuyVO.searchType == 'MEMBER_ID'}">구매자ID
+                                                    </option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td colspan="2">
-                                    <div class="row mb-3">
-                                        <div class="col">
-                                            <input type="text" class="form-control"
-                                                style="box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);">
+                                    </td>
+                                    <td colspan="2">
+                                        <div class="row mb-3">
+                                            <div class="col">
+                                                <input type="text" class="form-control" name="searchValue"
+                                                    style="box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);"
+                                                    th:value="${searchBuyVO.searchValue}">
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="row mb-3" style="padding-right: 20px;">
-                                        <div class="col">
-                                            <input class="form-control" type="text" value="구매일자" aria-label="input"
-                                                disabled readonly style="background-color: white;
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="row mb-3" style="padding-right: 20px;">
+                                            <div class="col">
+                                                <input class="form-control" type="text" value="구매일자" aria-label="input"
+                                                    disabled readonly style="background-color: white;
                                                 box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="row mb-3">
-                                        <div class="col">
-                                            <div class="input-group"
-                                                style="box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);">
-                                                <span class="input-group-text" id="basic-addon1">From</span>
-                                                <input type="date" class="form-control" aria-describedby="basic-addon1">
                                             </div>
                                         </div>
-                                        <div class="col">
-                                            <div class="input-group"
-                                                style="box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);">
-                                                <span class="input-group-text" id="basic-addon2">To</span>
-                                                <input type="date" class="form-control" aria-describedby="basic-addon2">
+                                    </td>
+                                    <td>
+                                        <div class="row mb-3">
+                                            <div class="col">
+                                                <div class="input-group"
+                                                    style="box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);">
+                                                    <span class="input-group-text" id="basic-addon1">From</span>
+                                                    <input type="date" class="form-control"
+                                                        aria-describedby="basic-addon1" name="fromDate"
+                                                        th:value="${searchBuyVO.fromDate}">
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="input-group"
+                                                    style="box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);">
+                                                    <span class="input-group-text" id="basic-addon2">To</span>
+                                                    <input type="date" class="form-control"
+                                                        aria-describedby="basic-addon2" name="toDate"
+                                                        th:value="${searchBuyVO.toDate}">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="row mb-3" style="padding-left: 20px;">
-                                        <div class="col d-grid">
-                                            <button type="button" class="btn btn-dark">검색</button>
+                                    </td>
+                                    <td>
+                                        <div class="row mb-3" style="padding-left: 20px;">
+                                            <div class="col d-grid">
+                                                <button type="submit" class="btn btn-dark">검색</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <table id="MyList" class="table table-hover align-middle">
+                        <colgroup>
+                            <col width="*">
+                            </col>
+                            <col width="23%">
+                            </col>
+                            <col width="23%">
+                            </col>
+                            <col width="23%">
+                            </col>
+                            <col width="23%">
+                            </col>
+                        </colgroup>
+                        <thead class="table-dark">
+                            <tr>
+                                <td>No</td>
+                                <td>구매번호</td>
+                                <td>구매자ID</td>
+                                <td>결제금액</td>
+                                <td>구매일자</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="bought, state : ${buyList}" th:onclick="showModal([[${bought.buyCode}]])">
+                                <td>[[${#lists.size(buyList) - state.index}]]</td>
+                                <td>[[${bought.buyCode}]]</td>
+                                <td>[[${bought.memberId}]]</td>
+                                <td>[[${#numbers.formatCurrency(bought.buyPrice)}]]</td>
+                                <td>[[${bought.buyDate}]]</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col"></div>
-        </div>
-        <!-- @@@@@@@@@@@@@@테이블@@@@@@@@@@@@@@ -->
-        <div class="row">
-            <table id="MyList" class="table table-hover align-middle"
-                style="box-shadow: 0px 0px 10px 0px rgb(230, 230, 230); text-align: center;">
-                <colgroup>
-                    <col width="*">
-                    </col>
-                    <col width="23%">
-                    </col>
-                    <col width="23%">
-                    </col>
-                    <col width="23%">
-                    </col>
-                    <col width="23%">
-                    </col>
-                </colgroup>
-                <thead>
-                    <tr>
-                        <td><strong>No.</strong></td>
-                        <td><strong>구매번호</strong></td>
-                        <td><strong>구매자ID</strong></td>
-                        <td><strong>결제금액</strong></td>
-                        <td><strong>구매일자</strong></td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="bought, state : ${buyList}" th:onclick="showModal([[${bought.buyCode}]])">
-                        <td>[[${#lists.size(buyList) - state.index}]]</td>
-                        <td>[[${bought.buyCode}]]</td>
-                        <td>[[${bought.memberId}]]</td>
-                        <td>[[${#numbers.formatCurrency(bought.buyPrice)}]]</td>
-                        <td>[[${bought.buyDate}]]</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
-    <!-- ///////////////////////////////////////////////////////////// -->
-    </div>
+
     <!-- Modal -->
-    <div class="modal fade modal-lg" id="buy-detail-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade modal-lg" id="buy-detail-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">구매 상세 내역</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <table class="table table-striped-columns table-bordered" style="text-align: center;">
@@ -164,18 +171,21 @@
                             <col width="25%">
                             <col width="25%">
                         </colgroup>
-                        <thead>
+                        <thead class="table-dark">
                             <tr>
-                                <td><strong>No.</strong></td>
-                                <td><strong>구매목록</strong></td>
-                                <td><strong>수량</strong></td>
-                                <td><strong>결제금액</strong></td>
+                                <td>No</td>
+                                <td>구매목록</td>
+                                <td>수량</td>
+                                <td>결제금액</td>
                             </tr>
                         </thead>
                         <tbody id="modal-tbody">
                             <!-- buyVo -->
                         </tbody>
                     </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                 </div>
             </div>
         </div>

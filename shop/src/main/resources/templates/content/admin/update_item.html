@@ -8,59 +8,41 @@
 </th:block>
 
 <th:block layout:fragment="contentFragment">
-
+    <!-- itemCode값 숨겨두고 유지하기 -->
+    <input id="updateItemCode" type="hidden" th:value="${updateItemCode}">
     <div class="row">
         <div class="col">
             <div class="row">
                 <div class="col">
-                    <label class="form-label">&nbsp;<strong>제품 목록</strong></label>
-                    <div style="text-align: right; font-size: small; margin-right: 7px;">
-                        <font color="red">
-                            * 총 50개의 상품이 등록되어 있습니다
-                        </font>
-                    </div>
+                    <label class="form-label">&nbsp;
+                        <strong>
+                            제품 목록&nbsp;(<font color="red">[[${#lists.size(updateList)}]]개</font>)
+                        </strong>
+                    </label>
                     <table id="updateItemTable" class="table table-hover">
                         <colgroup>
                             <col width="8%">
                             <col width="22%">
-                            <col width="*">
-                            <col width="15%">
-                            <col width="15%">
+                            <col width="40%">
+                            <col width="10%">
+                            <col width="20%">
                         </colgroup>
-                        <thead>
+                        <thead class="table-dark">
                             <tr>
-                                <td>
-                                    <strong>No.</strong>
-                                </td>
-                                <td>
-                                    <strong noWrap>제품코드</strong>
-                                </td>
-                                <td>
-                                    <strong>제품명</strong>
-                                </td>
-                                <td>
-                                    <strong>재고</strong>
-                                </td>
-                                <td>
-                                    <strong>상태</strong>
-                                </td>
+                                <td>No</td>
+                                <td>제품코드</td>
+                                <td>제품명</td>
+                                <td>재고</td>
+                                <td>상태</td>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="update, state : ${updateList}">
+                            <tr th:each="update, state : ${updateList}" th:onclick="getdetail([[${update.itemCode}]])">
                                 <td>
-                                    <div class="row">
-                                        <div class="col">
-                                            [[${#lists.size(updateList) - state.index}]]
-                                        </div>
-                                    </div>
+                                    [[${#lists.size(updateList) - state.index}]]
                                 </td>
                                 <td>
-                                    <div class="row">
-                                        <div class="col">
-                                            [[${update.itemCode}]]
-                                        </div>
-                                    </div>
+                                    [[${update.itemCode}]]
                                 </td>
                                 <td>
                                     <div class="row">
@@ -70,181 +52,61 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="row">
-                                        <div class="col">
-                                            [[${update.itemStock}]]
-                                        </div>
-                                    </div>
+                                    [[${update.itemStock}]]
                                 </td>
                                 <td>
-                                    <div class="row">
-                                        <div class="col">
-                                            X
-                                        </div>
-                                    </div>
+                                    [[${update.strStatus}]]
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <!-- /////////////////////////////////////////////////////////////////////////////////////////////////// -->
-                <div class="col">
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////// -->
+                <div class="col detail-div">
                     <label class="form-label">&nbsp;<strong>제품 기본 정보</strong></label>
                     <table id="updateItemTable2">
-                        <colgroup>
-                            <col width="16%">
-                            <col width="34%">
-                            <col width="16%">
-                            <col width="34%">
-                        </colgroup>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="row">
-                                        <div class="col">
-                                            &nbsp;카테고리
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="row">
-                                        <div class="col" style="padding-right: 30px;">
-                                            <select class="form-select" aria-label="Default select example"
-                                            style="background-color:rgb(250, 250, 250);">
-                                                <option selected></option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="row">
-                                        <div class="col">
-                                            &nbsp;제품수량
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="row">
-                                        <div class="col">
-                                            <input type="number" class="form-control text-center" min="1" 
-                                            style="background-color:rgb(250, 250, 250);">
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="row">
-                                        <div class="col">
-                                            &nbsp;상품명
-                                        </div>
-                                    </div>
-                                </td>
-                                <td colspan="3">
-                                    <div class="row">
-                                        <div class="col">
-                                            <input type="text" class="form-control text-center"
-                                            style="background-color:rgb(250, 250, 250);">
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="row">
-                                        <div class="col">
-                                            &nbsp;제품상태
-                                        </div>
-                                    </div>
-                                </td>
-                                <td colspan="3">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-check form-check-inline" style="margin-right: 15px;">
-                                                <input class="form-check-input" type="radio" name="" id=""
-                                                    value="option1" style="background-color:rgb(250, 250, 250);">
-                                                <label class="form-check-label" for="">준비중</label>
-                                            </div>
-                                            <div class="form-check form-check-inline" style="margin-left: 15px; margin-right: 15px;">
-                                                <input class="form-check-input" type="radio" name="" id=""
-                                                    value="option2" style="background-color:rgb(250, 250, 250);">
-                                                <label class="form-check-label" for="">판매중</label>
-                                            </div>
-                                            <div class="form-check form-check-inline" style="margin-left: 15px;">
-                                                <input class="form-check-input" type="radio" name="" id=""
-                                                    value="option3" style="background-color:rgb(250, 250, 250);">
-                                                <label class="form-check-label" for="">매진</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
+                        <tr>
+                            <td style="text-align: center;">…</td>
+                        </tr>
                     </table>
                     <div class="header-div"></div>
-                    <label class="form-label">&nbsp;<strong>상품 이미지 정보</strong></label>
+                    <label class="form-label">&nbsp;<strong>제품 이미지 정보</strong></label>
                     <table id="updateItemTable3">
-                        <colgroup>
-                            <col width="30%">
-                            <col width="70%">
-                        </colgroup>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="row">
-                                        <div class="col">
-                                            &nbsp;메인 이미지
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="row">
-                                        <div class="col">
-                                            뭐시기뭐시기
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="row">
-                                        <div class="col">
-                                            &nbsp;상세 이미지
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="row">
-                                        <div class="col">
-                                            뭐시기뭐시기1
-                                        </div>
-                                        <div class="col">
-                                            뭐시기뭐시기2
-                                        </div>
-                                        <div class="col">
-                                            뭐시기뭐시기3
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
+                        <tr>
+                            <td style="text-align: center;">…</td>
+                        </tr>
                     </table>
                     <div class="header-div"></div>
                     <div class="d-grid">
-                        <input type="button" value="변경" class="btn btn-dark">
+                        <input type="button" value="…" class="btn btn-dark">
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="img-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">제품 이미지 보기</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="main-image">
+                        <img src="" width="100%">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </th:block>
 
 <th:block layout:fragment="content_js">
     <!-- html 파일이 열릴 때 같이 실행되는 js -->
-    <!-- <script src="/"></script> -->
+    <script src="/js/content/admin/update_item.js"></script>
 </th:block>
 
 </html>

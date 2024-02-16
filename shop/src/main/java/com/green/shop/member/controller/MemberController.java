@@ -1,15 +1,16 @@
 package com.green.shop.member.controller;
 
+import com.green.shop.cart.vo.CartViewVO;
 import com.green.shop.member.service.MemberService;
 import com.green.shop.member.service.MemberServiceImpl;
 import com.green.shop.member.vo.MemberVO;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/member")
@@ -73,6 +74,23 @@ public class MemberController {
         }
         return loginInfo == null ? ""  : loginInfo.getMemberId();
     }
+
+    //내 정보 보기
+    @GetMapping("/myInfo")
+    public String myInfo(@RequestParam(name="page", required = false, defaultValue = "myInfo")
+                             String page, Model model, HttpSession session){
+
+        //로그인 정보 조회
+        MemberVO loginInfo = (MemberVO) session.getAttribute("loginInfo");
+
+        //정보 보내기
+        MemberVO myInfoList = memberService.selectMyInfo(loginInfo.getMemberId());
+        model.addAttribute("myInfoList", myInfoList);
+
+        model.addAttribute("page", page);
+        return "content/member/my_Info";
+    }
+
 
 
 

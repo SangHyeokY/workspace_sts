@@ -72,7 +72,6 @@ body{
 }
 .mainName{
     width: 100%;
-    font-size: large;
     text-overflow: clip;
     text-overflow: ellipsis;
     overflow:hidden;
@@ -114,6 +113,11 @@ body{
 #table-deco{
     box-shadow: 0px 0px 10px 0px rgb(230, 230, 230);
 }
+#MyList{
+    box-shadow: 0px 0px 10px 0px rgb(230, 230, 230); 
+    text-align: center; 
+    width: 100%;
+}
 #MyList td{
     border-bottom: 1px solid rgb(230, 230, 230);
     text-align: center;
@@ -153,4 +157,12 @@ body{
     padding-right: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+#main-image-info:hover, #sub-image-info:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#updateItemTable4{
+    width: 100%; text-align: center; box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);
 }

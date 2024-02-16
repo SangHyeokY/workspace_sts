@@ -19,4 +19,7 @@ public class ItemVO {
     private String itemIntro;
     private String regDate;
     private List<ImgVO> imgList;
+    private String strStatus;
+    private int itemStatus;
+    private CategoryVO categoryVO;
 }

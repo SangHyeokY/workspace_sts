@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing</title>
+    <style>
+        div{
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="row">
+        <div style="margin-bottom: 20vh;"></div>
+        <div class="col" style="margin-left: 0 auto; margin-right: 0 auto;">
+            <div class="row" style="text-align: center;">
+                <h3>Fetch를 통한 Javascript 데이터를 controller에서 받기</h3>
+                <h4>(개발자도구에서 콘솔을 확인)</h4>
+                <div>
+                    <input type="button" value=" fetch1 / VO객체로 데이터 전달받기" onclick="fetch1()">
+                </div>
+                <div>
+                    <input type="button" value=" fetch2 / Map을 사용해서 데이터 전달받기" onclick="fetch2()">
+                </div>
+                <div>
+                    <input type="button" value=" fetch3 / 배열 데이터를 list로 받기" onclick="fetch3()">
+                </div>
+                <div>
+                    <input type="button" value="fetch4 / 복잡한 데이터 전달받기" onclick="fetch4()">
+                </div>
+                <div>
+                    <input type="button" value="뒤로" onclick="history.back(-1)">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/test/fetch.js"></script>
+</body>
+
+</html>

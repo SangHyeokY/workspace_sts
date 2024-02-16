@@ -32,7 +32,8 @@ public class CartController {
 
     //장바구니 목록 / 불러오기
     @GetMapping("/list")
-    public String list(HttpSession session, Model model, @RequestParam(name="page") String page){
+    public String list(HttpSession session, Model model,
+                       @RequestParam(name="page", required = false, defaultValue = "cartList") String page){
         MemberVO loginInfo = (MemberVO) session.getAttribute("loginInfo");
         List<CartViewVO> cartList = cartService.selectCartList(loginInfo.getMemberId());
         model.addAttribute("cartList", cartList);

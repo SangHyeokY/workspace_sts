@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragment/personal_layout}">
+
+<th:block layout:fragment="content_css">
+    <!-- html 파일이 열릴 때 같이 실행되는 css -->
+    <link rel="stylesheet" href="/">
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+    <div class="row">
+        <div class="col">
+            <label for="" class="form-label">&nbsp;<strong>내 정보 관리 & 수정</strong></label>
+
+            <th:block th:each="my : ${myInfoList}">
+                <table id="updateItemTable2">
+                    <colgroup>
+                        <col width="10%">
+                        <col width="23%">
+                        <col width="10%">
+                        <col width="23%">
+                        <col width="10%">
+                        <col width="*">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col">
+                                        &nbsp;<strong>아이디</strong>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="col">
+                                            [[${my.memberId}]]
+                                            <input type="text" class="form-control" style="background-color:rgb(250, 250, 250); border: none; 
+                                        box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);" value="[[${my.memberId}]]"
+                                                name="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col">
+                                        &nbsp;<strong>이름</strong>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" style="background-color:rgb(250, 250, 250); border: none; 
+                                    box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);" value="[[${my.memberName}]]"
+                                            name="">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col">
+                                        &nbsp;<strong>성별</strong>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" style="background-color:rgb(250, 250, 250); border: none; 
+                                    box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);" value="[[${my.gender}]]" name="">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col">
+                                        &nbsp;<strong>전화번호</strong>
+                                    </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" style="background-color:rgb(250, 250, 250); border: none; 
+                                    box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);" value="[[${my.memberTel}]]"
+                                            name="">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col">
+                                        &nbsp;<strong>주소</strong>
+                                    </div>
+                            </td>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" style="background-color:rgb(250, 250, 250); border: none; 
+                                    box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);" value="[[${my.memberAddr}]]"
+                                            name="">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col">
+                                        &nbsp;<strong>이메일</strong>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" style="background-color:rgb(250, 250, 250); border: none; 
+                                    box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);" value="[[${my.memberEmail}]]"
+                                            name="">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col"></div>
+                                </div>
+                            </td>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" style="background-color:rgb(250, 250, 250); border: none; 
+                                    box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);" value="" name="">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col">
+                                        &nbsp;<strong>권한</strong>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" style="background-color:rgb(250, 250, 250); border: none; 
+                                    box-shadow: 0px 0px 7px 0px rgb(230, 230, 230);" value=" [[${my.memberRoll}]]"
+                                            name="">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="checkbox">&ensp;<strong>관리자</strong> 권한부여
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col">
+                                        <input class="btn btn-dark" type="button" value="변경">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </th:block>
+        </div>
+    </div>
+</th:block>
+
+<th:block layout:fragment="content_js">
+    <!-- html 파일이 열릴 때 같이 실행되는 js -->
+    <script src="/"></script>
+</th:block>
+
+</html>

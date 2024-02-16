@@ -45,25 +45,37 @@
         ) VALUES
     <foreach collection="imgList" item="img" separator=",">
         (
-        #{img.originFileName}
-        , #{img.attachedFileName}
-        , #{img.isMain}
-        , #{img.itemCode}
+            #{img.originFileName}
+            , #{img.attachedFileName}
+            , #{img.isMain}
+            , #{img.itemCode}
         )
     </foreach>
     </insert>
 
-
-
-    <!-- 구매 목록 조회  (관리자용) -->
+    <!-- 구매 목록 조회 + 검색 (관리자용) -->
+    <!--  등호 기호를 태그로 인식하므로...  -->
+    <!-- 작다 < : &lt; less than -->
+    <!-- 크다 > : &gt; greater than -->
     <select id="selectBuyInfoList" resultMap="buyMapper.buy">
         SELECT BUY_CODE
-        , MEMBER_ID
-        , BUY_PRICE
-        , BUY_DATE
+            , MEMBER_ID
+            , BUY_PRICE
+            , BUY_DATE
         FROM shop_buy
-        ORDER BY BUY_DATE DESC
+        WHERE 1 = 1
+        <if test='searchValue != null and !searchValue.equals("")'>
+            AND ${searchType} LIKE CONCAT('%', #{searchValue}, '%')
+        </if>
+        <if test='fromDate != null and !fromDate.equals("")'>
+            AND DATE_FORMAT(BUY_DATE, '%Y-%m-%d') &gt;= #{fromDate}
+        </if>
+        <if test='toDate != null and !toDate.equals("")'>
+            AND DATE_FORMAT(BUY_DATE, '%Y-%m-%d') &lt;= #{toDate}
+        </if>
+        ORDER BY BUY_DATE DESC;
     </select>
+
 
     <!-- 구매 목록 조회 -> 상세구매정보 조회 (관리자용) -->
     <select id="selectBuyDetail" resultMap="buyMapper.buy">
@@ -86,14 +98,50 @@
         AND BUY.BUY_CODE = #{buyCode}
     </select>
 
-<!-- 상품 목록 -->
+    <!-- 상품 목록  -->
     <select id="selectItemBeforeUpdate" resultMap="itemMapper.item">
         SELECT ITEM_CODE
-        , ITEM_NAME
-        , ITEM_STOCK
-        FROM SHOP_ITEM
+            , ITEM_NAME
+            , ITEM_STOCK
+            , ITEM_STATUS
+            , CASE
+                WHEN ITEM_STATUS = 1 THEN '준비 중'
+                WHEN ITEM_STATUS = 2 THEN '판매 중'
+                ELSE '판매 불가'
+                END AS STR_STATUS
+        FROM shop_item;
     </select>
 
+    <!-- 상품상세보기 -->
+    <select id="selectItemDetail" resultMap="itemMapper.item">
+        SELECT CATE_NAME
+            , CATE.CATE_CODE
+            , ITEM_STOCK
+            , ITEM_NAME
+            , ITEM_STATUS
+            , ITEM.ITEM_CODE
+            , ATTACHED_FILE_NAME
+            , ORIGIN_FILE_NAME
+            , IMG_CODE
+            , IS_MAIN
+        FROM shop_item ITEM
+        INNER JOIN item_category CATE
+        ON ITEM.CATE_CODE = CATE.CATE_CODE
+        INNER JOIN item_image IMG
+        ON ITEM.ITEM_CODE = IMG.ITEM_CODE
+        WHERE ITEM.ITEM_CODE = #{itemCode};
+    </select>
+
+    <!-- cateCode는 뭘로? -->
+    <update id="updateItem">
+        UPDATE shop_item
+        SET
+            ITEM_STOCK = #{itemStock}
+            , ITEM_NAME = #{itemName}
+            , ITEM_STATUS = #{itemStatus}
+            , CATE_CODE = #{cateCode}
+        WHERE ITEM_CODE = #{itemCode};
+    </update>
 
 
 </mapper>

@@ -29,7 +29,7 @@
             </button>
           </h2>
           <div th:id="${'collapse_' + state.count}" class="accordion-collapse collapse">
-            <div class="accordion-body">
+            <div class="accordion-body" style="background-color: rgb(250, 250, 250);">
               <table id="MyList" class="table table-hover align-middle">
                 <colgroup>
                   <col width="15%">
@@ -42,8 +42,8 @@
                   </col>
                 </colgroup>
                 <thead>
-                  <tr>
-                    <td><strong>No.</strong></td>
+                  <tr class="table-light">
+                    <td><strong>No</strong></td>
                     <td><strong>구매목록</strong></td>
                     <td><strong>수량</strong></td>
                     <td><strong>결제금액</strong></td>

@@ -24,14 +24,20 @@
       </div>
        <!-- ------------------------------------------------------------------------------ -->
        <!-- 하위버튼 -->
-      <div class="col-12 mb-1" id="btn-sign" style="text-align: center; white-space: nowrap;">
-        <button type="submit" class="btn btn-dark col-10">Login</button>&ensp;&nbsp;
-        <button type="button" class="btn btn-secondary" onclick="history.back(-1)">Back</button>
+      <div class="col-12" id="btn-sign" style="text-align: center; white-space: nowrap;">
+        <div class="row">
+          <div class="col-9 d-grid">
+            <button type="submit" class="btn btn-dark">로그인</button>
+          </div>
+          <div class="col-3 d-grid">
+            <button type="button" class="btn btn-secondary" onclick="history.back(-1)">뒤로</button>
+          </div>
+        </div>
       </div>
       <!-- ------------------------------------------------------------------------------ -->
       <!-- 비동기 로그인 -->
-      <div class="col-12" id="btn-sign" style="text-align: center; white-space: nowrap;">
-        <button type="button" class="btn btn-dark col-12" onclick="login()">비동기 로그인</button>
+      <div class="col-12 d-grid" id="btn-sign" style="text-align: center; white-space: nowrap;">
+        <button type="button" class="btn btn-dark" onclick="login()">비동기 로그인</button>
       </div>
     </form>
     <!-- ------------------------------------------------------------------------------ -->

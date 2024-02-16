@@ -1,5 +1,6 @@
 package com.green.shop.admin.service;
 
+import com.green.shop.admin.vo.SearchBuyVO;
 import com.green.shop.buy.vo.BuyVO;
 import com.green.shop.item.vo.CategoryVO;
 import com.green.shop.item.vo.ImgVO;
@@ -19,11 +20,17 @@ public interface AdminService {
     int selectNextItemCode();
 
     //구매기록 조회 (관리자용)
-    List<BuyVO> selectBuyInfoList();
+    List<BuyVO> selectBuyInfoList(SearchBuyVO searchBuyVO);
 
     //구매목록 상세조회 (비동기)
     BuyVO selectBuyDetail(int buyCode);
 
     //제품 정보 변경, 제품목록 조회
     List<ItemVO> selectItemBeforeUpdate();
+
+    //제품 정보 변경 상세보기
+    ItemVO selectItemDetail(int itemCode);
+
+    //업데이트하기
+    void updateItem(ItemVO itemVO);
 }

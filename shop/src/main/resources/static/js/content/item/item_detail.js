@@ -66,7 +66,7 @@ function goBuy() {
     document.querySelector('#insert-buy-form').submit();
 
 
-    alert("반응");
+    alert("바로 구매가 완료 되었습니다.");
     // rh
     //location.href=`/buy/buyDirect?cartCodeList=${cartCodeList}`;
   //  location.href=`/buy/buyDirect`;

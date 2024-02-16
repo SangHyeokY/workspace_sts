@@ -1,5 +1,6 @@
 package com.green.shop.admin.service;
 
+import com.green.shop.admin.vo.SearchBuyVO;
 import com.green.shop.buy.vo.BuyVO;
 import com.green.shop.item.vo.ImgVO;
 import com.green.shop.item.vo.ItemVO;
@@ -36,8 +37,8 @@ public class AdminServiceImpl implements AdminService{
 
     //구매기록 조회 (관리자용)
     @Override
-    public List<BuyVO> selectBuyInfoList() {
-       return sqlSession.selectList("adminMapper.selectBuyInfoList");
+    public List<BuyVO> selectBuyInfoList(SearchBuyVO searchBuyVO) {
+       return sqlSession.selectList("adminMapper.selectBuyInfoList", searchBuyVO);
     }
 
     //구매기록 상세 조회 (비동기)
@@ -51,6 +52,19 @@ public class AdminServiceImpl implements AdminService{
     public List<ItemVO> selectItemBeforeUpdate() {
         return sqlSession.selectList("adminMapper.selectItemBeforeUpdate");
     }
+
+    //제품 정보 상세보기
+    @Override
+    public ItemVO selectItemDetail(int itemCode) {
+        return sqlSession.selectOne("adminMapper.selectItemDetail", itemCode);
+    }
+
+    //업데이트하기
+    @Override
+    public void updateItem(ItemVO itemVO) {
+        sqlSession.update("adminMapper.updateItem", itemVO);
+    }
+
 
 
 

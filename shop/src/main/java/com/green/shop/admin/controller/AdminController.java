@@ -1,6 +1,7 @@
 package com.green.shop.admin.controller;
 
 import com.green.shop.admin.service.AdminServiceImpl;
+import com.green.shop.admin.vo.SearchBuyVO;
 import com.green.shop.buy.service.BuyServiceImpl;
 import com.green.shop.buy.vo.BuyDetailVO;
 import com.green.shop.buy.vo.BuyVO;
@@ -12,6 +13,7 @@ import com.green.shop.member.vo.MemberVO;
 import com.green.shop.util.ConstantVariable;
 import com.green.shop.util.UploadUtil;
 import jakarta.annotation.Resource;
+import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 @RequestMapping("/admin")
@@ -46,6 +46,8 @@ public class AdminController {
         //카테고리 목록 조회
         List<CategoryVO> categoryList = itemService.selectCategoryList();
         model.addAttribute("categoryList", categoryList);
+        //페이지 전달
+        model.addAttribute("page", 2);
         return "content/admin/reg_item_form";
     }
 
@@ -64,7 +66,7 @@ public class AdminController {
         //다음에 들어갈 ITEM_CODE 조회 -----------------------------------------------------------//
         int itemCode = adminService.selectNextItemCode();
 
-        //상품 등록 쿼리 실행 --------------------------------------------------------------------//
+        //제품 등록 쿼리 실행 --------------------------------------------------------------------//
         //조회한 ITEM_CODE 값을 itemVO에 넣기
         itemVO.setItemCode(itemCode);
 
@@ -87,16 +89,14 @@ public class AdminController {
         return "redirect:/admin/regItemForm";
     }
 
-        // 관리자 페이지 만들기
-        // (관리자 전용)으로 만들어야 하지않나??
-        // Mapper에서 쿼리를 새로 만들어야 함 (MemberID 다르게 봐야됨)
-        @GetMapping("/adminHistory")
-        public String adminHistory(Model model){
-
+        // 관리자 페이지
+        @RequestMapping("/adminHistory")
+        public String adminHistory(Model model, SearchBuyVO searchBuyVO){
             //구매 목록 조회
-            List<BuyVO> buyList = adminService.selectBuyInfoList();
+            List<BuyVO> buyList = adminService.selectBuyInfoList(searchBuyVO);
             model.addAttribute("buyList", buyList);
-
+            //페이지 전달
+            model.addAttribute("page", 1);
             return "content/admin/admin_history";
         }
 
@@ -104,21 +104,51 @@ public class AdminController {
         @ResponseBody
         @PostMapping("/selectBuyDetail")
         public BuyVO selectBuyDetail(@RequestParam(name="buyCode") int buyCode){
-
             //구매 상세 내역 조회 (비동기)
             BuyVO buyVO = adminService.selectBuyDetail(buyCode);
-
             return buyVO;
         }
 
-    //제품 정보 변경, 제품목록 조회
+    //제품 정보목록 조회
     @GetMapping("/updateItem")
-    public String selectItemBeforeUpdate(Model model){
+    public String selectItemBeforeUpdate(Model model,
+                  @RequestParam(name="itemCode", required = false, defaultValue = "0") int itemCode){
+                    //페이지 내용 변경되어도 itemCode 값 유지
         //목록조회
         List<ItemVO> updateList = adminService.selectItemBeforeUpdate();
         model.addAttribute("updateList", updateList);
-
+        //페이지 전달
+        model.addAttribute("page", 4);
+        model.addAttribute("updateItemCode", itemCode);
         return "content/admin/update_item";
     }
+
+    //제품 정보목록 변경화면의 상품목록 테이블의 행 클릭 시
+    // 상품의 상세정보를 조회 (비동기)
+    @ResponseBody
+    @PostMapping("/selectItemDetail")
+    public Map<String, Object> selectItemDetail(@RequestParam(name="itemCode") int itemCode){
+        //상품 상세정보 조회
+        ItemVO itemDetail = adminService.selectItemDetail(itemCode);
+        //카테고리 목록 조회
+        List<CategoryVO> cateList = itemService.selectCategoryList();
+        //위 두 데이터를 담을 수 있는 map 객체 생성
+        Map<String, Object> map = new HashMap<>();
+        map.put("itemDetail", itemDetail);
+        map.put("cateList", cateList);
+        return map;
+    }
+
+    //상품정보 변경(동기)
+    @PostMapping("/updateItemDetail")
+    public String updateItem(ItemVO itemVO){
+        //목록정보 업데이트
+        adminService.updateItem(itemVO);
+        return "redirect:/admin/updateItem?itemCode=" + itemVO.getItemCode();
+    }
+
+
+
+
 
 }
