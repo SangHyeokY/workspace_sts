@@ -12,4 +12,7 @@ public interface MemberService {
 
     //내정보 보기
     MemberVO selectMyInfo(String memberId);
+
+    //내정보 업데이트
+    void updateRoll(MemberVO memberVO);
 }

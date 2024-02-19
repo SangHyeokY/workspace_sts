@@ -66,6 +66,12 @@
     WHERE MEMBER_ID = #{memberId}
     </select>
 
+    <update id="updateRoll">
+        UPDATE SHOP_MEMBER
+        SET
+        MEMBER_ROLL = #{memberRoll}
+        WHERE MEMBER_ID = #{memberId}
+    </update>
 
 </mapper>
 

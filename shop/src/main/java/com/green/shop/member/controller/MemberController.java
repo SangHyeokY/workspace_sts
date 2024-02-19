@@ -79,16 +79,21 @@ public class MemberController {
     @GetMapping("/myInfo")
     public String myInfo(@RequestParam(name="page", required = false, defaultValue = "myInfo")
                              String page, Model model, HttpSession session){
-
         //로그인 정보 조회
         MemberVO loginInfo = (MemberVO) session.getAttribute("loginInfo");
-
         //정보 보내기
         MemberVO myInfoList = memberService.selectMyInfo(loginInfo.getMemberId());
         model.addAttribute("myInfoList", myInfoList);
-
+        //페이지 정보 보내기
         model.addAttribute("page", page);
         return "content/member/my_Info";
+    }
+
+    //내정보 업데이트
+    @GetMapping("/updateRoll")
+    public String updateRoll(MemberVO memberVO){
+        memberService.updateRoll(memberVO);
+        return "redirect:/myInfo?page=myInfoList";
     }
 
 

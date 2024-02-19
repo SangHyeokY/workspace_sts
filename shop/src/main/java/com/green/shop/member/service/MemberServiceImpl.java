@@ -29,4 +29,14 @@ public class MemberServiceImpl implements MemberService{
     public MemberVO selectMyInfo(String memberId) {
         return sqlSession.selectOne("memberMapper.selectMyInfo", memberId);
     }
+
+    //내정보 권한 업데이트
+    @Override
+    public void updateRoll(MemberVO memberVO) {
+        sqlSession.update("memberMapper.updateRoll", memberVO);
+    }
+
+
+
+
 }
