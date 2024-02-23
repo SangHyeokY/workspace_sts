@@ -48,7 +48,11 @@ public class StudentController {
         //학생 삭제 기능
         studentService.delete(stuNo);
         return "delete_result";
+    }
 
+    @GetMapping("/message")
+    public String messageTest(){
+        return "message";
     }
 
 }
